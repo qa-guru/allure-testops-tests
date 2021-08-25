@@ -1,12 +1,10 @@
 package cloud.autotests.pages;
 
-import cloud.autotests.data.MenuItem;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import io.qameta.allure.Step;
-import org.openqa.selenium.support.FindBy;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class ProjectsTable {
@@ -17,5 +15,11 @@ public class ProjectsTable {
     public ProjectPage navigateTo(String projectName) {
         tableRows.find(text(projectName)).$(".ProjectCard__name > a").click();
         return new ProjectPage();
+    }
+
+    @Step("Click first Launches button")
+    public LaunchesPage clickFirstLaunchesBtn() {
+        $(".ProjectCard").$(".ProjectCard__links").$(".ProjectCard__link", 2).click();
+        return new LaunchesPage();
     }
 }
