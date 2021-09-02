@@ -11,8 +11,8 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
-@Story("DeleteTestTags")
-public class DeleteTestTags extends TestBase {
+@Story("AddTestTags")
+public class AddTestTags extends TestBase {
 
 	@Test
 	@DisplayName("Successful login as testuser")
