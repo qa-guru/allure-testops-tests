@@ -40,16 +40,16 @@ public class FormEditWidget extends FormBase {
 
     //region Get methods
     private SelenideElement getFieldByLabel(String fieldLabel) {
-        return contentFields.findBy(text(fieldLabel)).parent();
+        return contentFields.find(text(fieldLabel)).parent();
     }
 
     private SelenideElement getSelectedItem(String listItemName) {
-        return dropDawnList.findBy(text(listItemName));
+        return dropDawnList.find(text(listItemName));
     }
     //endregion
 
     //region Entering data steps
-    @Step("Set value '{value}' of input field 'Name'")
+    @Step("Set value '{value}' in input field 'Name'")
     public FormEditWidget setNameInput(String value) {
         nameInput.val(value);
         return this;
@@ -61,13 +61,13 @@ public class FormEditWidget extends FormBase {
         return this;
     }
 
-    @Step("Set value '{value}' of input field 'Test cases query'")
+    @Step("Set value '{value}' in input field 'Test cases query'")
     public FormEditWidget setTestCasesQueryInput(String value) {
         testCasesQueryInput.val(value);
         return this;
     }
 
-    @Step("Set value '{value}' of input field 'Launchers query'")
+    @Step("Set value '{value}' in input field 'Launchers query'")
     public FormEditWidget setLaunchersQueryValue(String value) {
         launchersQueryInput.val(value);
         return this;

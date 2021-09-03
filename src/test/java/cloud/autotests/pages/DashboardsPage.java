@@ -9,7 +9,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -20,19 +22,19 @@ public class DashboardsPage {
     Alerts alert = new Alerts();
 
     //dashboards page header elements
-    private ElementsCollection dashboardsTabList = $(".ProjectDashboards__tabs").$$(".Tabs__item");
+    private ElementsCollection dashboardsList = $(".ProjectDashboards__tabs").$$(".Tabs__item");
     private SelenideElement dashboardTitle = $(".BreadCrumbs");
     private SelenideElement newDashboardButton = $(".ProjectDashboards__title .Button");
     private SelenideElement dashboardActionsButton = $(".ProjectDashboards__navigation .Button");
     private SelenideElement fullScreenControls = $(".Dashboard__fullscreen-controls");
 
     //dashboard content elements
-    private ElementsCollection widgetsList =$(".Dashboard__content").$$(".react-grid-item");
+    private ElementsCollection widgetsList = $(".Dashboard__content").$$(".react-grid-item");
     private SelenideElement addWidgetButton = $(".Dashboard__empty .Button");
 
     //region Get elements methods
     public SelenideElement getDashboardTab(String dashboardName) {
-        return dashboardsTabList.find(text(dashboardName));
+        return dashboardsList.find(text(dashboardName));
     }
 
     public SelenideElement getDashboardActionItem(DashboardActionItem actionItem) {
@@ -89,6 +91,13 @@ public class DashboardsPage {
         return this;
     }
 
+    @Step("Select dashboard action '{actionItem}'")
+    public DashboardsPage selectDashboardAction(DashboardActionItem actionItem) {
+        dashboardActionsButton.click();
+        getDashboardActionItem(actionItem).click();
+        return this;
+    }
+
     @Step("Check that dashboard '{dashboardName}' exist")
     public DashboardsPage checkThatDashboardExist(String dashboardName) {
         getDashboardTab(dashboardName).shouldBe(visible);
@@ -98,13 +107,6 @@ public class DashboardsPage {
     @Step("Check that dashboard '{dashboardName}' deleted")
     public DashboardsPage checkThatDashboardDeleted(String dashboardName) {
         getDashboardTab(dashboardName).shouldNotBe(visible);
-        return this;
-    }
-
-    @Step("Select dashboard action '{actionItem}'")
-    public DashboardsPage selectDashboardAction(DashboardActionItem actionItem) {
-        dashboardActionsButton.click();
-        getDashboardActionItem(actionItem).click();
         return this;
     }
 
@@ -165,37 +167,37 @@ public class DashboardsPage {
         return this;
     }
 
-    @Step("Check contents of widget with 'Markdown' type")
+    @Step("Check that widget have 'Markdown Articles' content")
     public DashboardsPage checkWidgetHaveMarkdownArticles(String widgetName) {
         getWidgetByName(widgetName).$(".MarkdownArticle").shouldHave(text(widgetName));
         return this;
     }
 
-    @Step("Check that widget have 'Trend chart' graph")
+    @Step("Check that widget have 'Trend chart graph' content")
     public DashboardsPage checkWidgetHaveTrendChartGraph(String widgetName) {
         getWidgetByName(widgetName).$(".TrendChart__graph").should(visible);
         return this;
     }
 
-    @Step("Check that widget have 'Pie chart' graph")
+    @Step("Check that widget have 'Pie chart graph' content")
     public DashboardsPage checkWidgetHavePieChartGraph(String widgetName) {
         getWidgetByName(widgetName).$(".PieChart__graph").should(visible);
         return this;
     }
 
-    @Step("Check that widget have 'Tree view chart' graph")
+    @Step("Check that widget have 'Tree view chart graph' content")
     public DashboardsPage checkWidgetHaveTreeViewChartGraph(String widgetName) {
         getWidgetByName(widgetName).$(".TreeViewChart__graph").should(visible);
         return this;
     }
 
-    @Step("Check that widget have 'Test case row' list")
+    @Step("Check that widget have 'Test case row list' content")
     public DashboardsPage checkWidgetHaveTestCaseRowList(String widgetName) {
         getWidgetByName(widgetName).$(".list").should(visible);
         return this;
     }
 
-    @Step("Check that widget have 'Launch row' list")
+    @Step("Check that widget have 'Launch row list' content")
     public DashboardsPage checkWidgetHaveLaunchRowList(String widgetName) {
         getWidgetByName(widgetName).$(".list").should(visible);
         return this;

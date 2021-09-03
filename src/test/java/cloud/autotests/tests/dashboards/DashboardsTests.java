@@ -19,14 +19,14 @@ public class DashboardsTests extends TestBase {
 
     DashboardsPage dashboardsPage = new DashboardsPage();
     FormEditDashboard formEditDashboard = new FormEditDashboard();
-    String dashboardsUrl = App.config.webUrl() + "/project/331/dashboards";
+    String dashboardsUrl = App.config.webUrl() + "/project/308/dashboards";
 
-    //region Adding new dashboard tests
+    //region Add new dashboards tests
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
-    @DisplayName("Adding new dashboard")
+    @Story("Add new dashboard tests")
+    @DisplayName("Add new dashboard")
     void addDashboard() {
         String dashboardName = "NewDashboard";
         open(dashboardsUrl);
@@ -38,8 +38,8 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
-    @DisplayName("Adding dashboard with blank name")
+    @Story("Add new dashboard tests")
+    @DisplayName("Add dashboard with blank name")
     void addDashboardWithBlankName() {
         String dashboardName = "";
         open(dashboardsUrl);
@@ -52,8 +52,8 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
-    @DisplayName("Adding dashboard with only space characters in name")
+    @Story("Add new dashboard tests")
+    @DisplayName("Add dashboard with only space characters in name")
     void addDashboardWithSpacesName() {
         String dashboardName = "   ";
         open(dashboardsUrl);
@@ -66,7 +66,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
+    @Story("Add new dashboard tests")
     @DisplayName("Cancel adding new dashboard using cancel button")
     void cancelAddingDashboardByCancelButton() {
         String dashboardName = "CancelButton";
@@ -80,7 +80,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
+    @Story("Add new dashboard tests")
     @DisplayName("Cancel adding new dashboard using close button")
     void cancelAddingDashboardByCloseButton() {
         String dashboardName = "CloseButton";
@@ -95,7 +95,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
+    @Story("Add new dashboard tests")
     @DisplayName("Cancel adding new dashboard with blank name using cancel button")
     void cancelAddingDashboardWithBlankNameByCancelButton() {
         String dashboardName = "";
@@ -109,7 +109,7 @@ public class DashboardsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding new dashboard tests")
+    @Story("Add new dashboard tests")
     @DisplayName("Cancel adding new dashboard with blank name using close button")
     void cancelAddingDashboardWithBlankNameByCloseButton() {
         String dashboardName = "";
@@ -126,7 +126,7 @@ public class DashboardsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various dashboard tests")
-    @DisplayName("Switching dashboard full screen mode on/off")
+    @DisplayName("Switch dashboard full screen mode on/off")
     void dashboardFullScreenMode() {
         String dashboardName = "FullScreen";
         open(dashboardsUrl);
@@ -142,7 +142,7 @@ public class DashboardsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various dashboard tests")
-    @DisplayName("Editing dashboard name")
+    @DisplayName("Edit dashboard name")
     void editDashboardName() {
         String dashboardName = "Edit";
         String newDashboardName = "EditNew";
@@ -159,7 +159,7 @@ public class DashboardsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various dashboard tests")
-    @DisplayName("Deleting dashboard")
+    @DisplayName("Delete dashboard")
     void deleteDashboard() {
         String dashboardName = "Delete";
         open(dashboardsUrl);

@@ -1,7 +1,13 @@
 package cloud.autotests.tests.dashboards;
 
 import cloud.autotests.config.App;
-import cloud.autotests.data.dashboards.*;
+import cloud.autotests.data.dashboards.DashboardActionItem;
+import cloud.autotests.data.dashboards.FormGroupByItem;
+import cloud.autotests.data.dashboards.FormLaunchAnalyticMetricItem;
+import cloud.autotests.data.dashboards.FormTopTestCasesMetricItem;
+import cloud.autotests.data.dashboards.FormTreeItem;
+import cloud.autotests.data.dashboards.FormTypeItem;
+import cloud.autotests.data.dashboards.WidgetActionItem;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.pages.DashboardsPage;
 import cloud.autotests.pages.components.forms.dashboards.FormEditWidget;
@@ -21,7 +27,7 @@ public class WidgetsTests extends TestBase {
 
     DashboardsPage dashboardsPage = new DashboardsPage();
     FormEditWidget formEditWidget = new FormEditWidget();
-    String dashboardsUrl = App.config.webUrl() + "/project/331/dashboards";
+    String dashboardsUrl = App.config.webUrl() + "/project/308/dashboards";
 
     //region Standard (Overview) dashboard widgets tests
     @WithLogin
@@ -40,7 +46,7 @@ public class WidgetsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various widget tests")
-    @DisplayName("Adding widget using 'Add widget' button")
+    @DisplayName("Add widget using 'Add widget' button")
     void addWidgetByAddWidgetButton() {
         String name = "ByAddWidgetButton";
         open(dashboardsUrl);
@@ -58,7 +64,7 @@ public class WidgetsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various widget tests")
-    @DisplayName("Editing widget")
+    @DisplayName("Edit widget")
     void editWidget() {
         String name = "EditWidget";
         String newName = name + "New";
@@ -82,7 +88,7 @@ public class WidgetsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various widget tests")
-    @DisplayName("Cloning widget")
+    @DisplayName("Clone widget")
     void cloneWidget() {
         String name = "CloneWidget";
         String newName = name + "New";
@@ -105,7 +111,7 @@ public class WidgetsTests extends TestBase {
     @Test
     @Owner("Oleg1717")
     @Story("Various widget tests")
-    @DisplayName("Deleting widget")
+    @DisplayName("Delete widget")
     void deleteWidget() {
         String name = "DeleteWidget";
         open(dashboardsUrl);
@@ -121,12 +127,12 @@ public class WidgetsTests extends TestBase {
     }
     //endregion
 
-    //region Adding some types of widgets
+    //region Add some types of widgets
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding some types of widgets")
-    @DisplayName("Adding widget with type 'Markdown'")
+    @Story("Add some types of widgets")
+    @DisplayName("Add widget with type 'Markdown'")
     void addMarkdownTypeWidget() {
         String name = FormTypeItem.MARKDOWN.toString();
         open(dashboardsUrl);
@@ -144,8 +150,8 @@ public class WidgetsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding some types of widgets")
-    @DisplayName("Adding widget with type 'Launch statistic Trend'")
+    @Story("Add some types of widgets")
+    @DisplayName("Add widget with type 'Launch statistic Trend'")
     void addLaunchStatisticTrendTypeWidget() {
         String name = FormTypeItem.LAUNCH_STATISTIC_TREND.toString();
         open(dashboardsUrl);
@@ -162,8 +168,8 @@ public class WidgetsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding some types of widgets")
-    @DisplayName("Adding widget with type 'Automation Trend'")
+    @Story("Add some types of widgets")
+    @DisplayName("Add widget with type 'Automation Trend'")
     void addAutomationTrendTypeWidget() {
         String name = FormTypeItem.AUTOMATION_TREND.toString();
         open(dashboardsUrl);
@@ -180,8 +186,8 @@ public class WidgetsTests extends TestBase {
     @WithLogin
     @Test
     @Owner("Oleg1717")
-    @Story("Adding some types of widgets")
-    @DisplayName("Adding widget with type 'Launches'")
+    @Story("Add some types of widgets")
+    @DisplayName("Add widget with type 'Launches'")
     void addLaunchesTypeWidget() {
         String name = FormTypeItem.LAUNCHES.toString();
         open(dashboardsUrl);
@@ -197,8 +203,8 @@ public class WidgetsTests extends TestBase {
 
     @WithLogin
     @Owner("Oleg1717")
-    @Story("Adding widgets with type 'Launch Analytics'")
-    @ParameterizedTest(name = "Adding widget with: 'Metric' item = {0}")
+    @Story("Add widgets with type 'Launch Analytics'")
+    @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
     @EnumSource(value = FormLaunchAnalyticMetricItem.class)
     void addLaunchAnalyticsWidgets(FormLaunchAnalyticMetricItem item) {
         String name = item.toString();
@@ -216,8 +222,8 @@ public class WidgetsTests extends TestBase {
 
     @WithLogin
     @Owner("Oleg1717")
-    @Story("Adding widgets with type 'Test Case Pie Chart'")
-    @ParameterizedTest(name = "Adding widget with: 'Group by' item = {0}")
+    @Story("Add widgets with type 'Test Case Pie Chart'")
+    @ParameterizedTest(name = "Add widget with: 'Group by' item = {0}")
     @EnumSource(value = FormGroupByItem.class)
     void addTestCasePieChartWidgets(FormGroupByItem item) {
         String name = item.toString();
@@ -235,8 +241,8 @@ public class WidgetsTests extends TestBase {
 
     @WithLogin
     @Owner("Oleg1717")
-    @Story("Adding widgets with type 'Top Test Cases'")
-    @ParameterizedTest(name = "Adding widget with: 'Metric' item = {0}")
+    @Story("Add widgets with type 'Top Test Cases'")
+    @ParameterizedTest(name = "Add widget with: 'Metric' item = {0}")
     @EnumSource(value = FormTopTestCasesMetricItem.class)
     void addTopTestCasesWidgets(FormTopTestCasesMetricItem item) {
         String name = item.toString();
@@ -254,8 +260,8 @@ public class WidgetsTests extends TestBase {
 
     @WithLogin
     @Owner("Oleg1717")
-    @Story("Adding widgets with type 'Test Case Tree Map Chart'")
-    @ParameterizedTest(name = "Adding widget with: 'Tree' item = {0}")
+    @Story("Add widgets with type 'Test Case Tree Map Chart'")
+    @ParameterizedTest(name = "Add widget with: 'Tree' item = {0}")
     @EnumSource(value = FormTreeItem.class)
     void addTestCaseTreeMapChartWidgets(FormTreeItem item) {
         String name = item.toString();
