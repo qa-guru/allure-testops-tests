@@ -4,7 +4,6 @@ public enum FormTreeItem {
     FEATURES("Features"),
     SUITES("Suites");
 
-
     private final String displayedName;
 
     FormTreeItem(String displayedName) {

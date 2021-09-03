@@ -220,5 +220,4 @@ public class DashboardsPage {
         return this;
     }
     //endregion
-
 }

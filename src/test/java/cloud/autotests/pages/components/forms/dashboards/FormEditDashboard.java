@@ -58,5 +58,4 @@ public class FormEditDashboard extends FormBase {
         cancelButton.click();
         return this;
     }
-
 }
