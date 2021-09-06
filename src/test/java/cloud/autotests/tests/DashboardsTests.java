@@ -73,6 +73,7 @@ public class DashboardsTests extends TestBase {
             dashboardsPage.checkThatDashboardExist(dashboardName);
         }
 
+        @WithLogin
         @Test
         @Owner("Oleg1717")
         @DisplayName("Add dashboard with blank name")

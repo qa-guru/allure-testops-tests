@@ -79,8 +79,6 @@ public class DashboardsPage {
     //region Dashboards page header steps
     @Step("Open dashboard page")
     public DashboardsPage openDashboardPage(String dashboardUrl) {
-        open("/favicon.ico");
-        localStorage().setItem("AS_AUTH_2", System.getProperty("AUTH_2"));
         open(dashboardUrl);
         return this;
     }

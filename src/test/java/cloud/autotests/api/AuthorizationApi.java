@@ -22,34 +22,4 @@ public class AuthorizationApi {
                 .statusCode(200)
                 .extract().as(Authorization.class);
     }
-
-/*    @Test
-    public void getAuthorizationResponse2() {
-        RestAssured.baseURI = App.config.apiUrl();
-        String resp = given()
-                .filter(AllureRestAssuredFilter.withCustomTemplates())
-                .formParam("grant_type", "apitoken")
-                .formParam("scope", "openid")
-                .formParam("token", App.config.userToken())
-                .when()
-                .post("/api/uaa/oauth/token")
-                .then()
-                .statusCode(200)
-                .extract().response().asString();
-        System.out.println(resp);
-    }*/
-
-/*    public static String getAccessToken() {
-        RestAssured.baseURI = App.config.apiUrl();
-        return given()
-                .formParam("grant_type", "apitoken")
-                .formParam("scope", "openid")
-                .formParam("token", App.config.userToken())
-                .when()
-                .post("/api/uaa/oauth/token")
-                .then()
-                .statusCode(200)
-                .extract().path("access_token");
-    }*/
-
 }
