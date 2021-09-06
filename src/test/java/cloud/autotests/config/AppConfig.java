@@ -13,5 +13,5 @@ public interface AppConfig extends Config {
     String userLogin();
     String userPassword();
     String userToken();
-
+    int projectId();
 }
