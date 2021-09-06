@@ -4,6 +4,7 @@ public enum FormTopTestCasesMetricItem {
     DURATION("Duration"),
     SUCCESS_RATE("Success Rate");
 
+
     private final String displayedName;
 
     FormTopTestCasesMetricItem(String displayedName) {

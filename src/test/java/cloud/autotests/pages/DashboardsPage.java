@@ -3,8 +3,6 @@ package cloud.autotests.pages;
 import cloud.autotests.data.dashboards.DashboardActionItem;
 import cloud.autotests.data.dashboards.WidgetActionItem;
 import cloud.autotests.pages.components.Alerts;
-import cloud.autotests.pages.components.forms.FormDelete;
-import cloud.autotests.pages.components.forms.dashboards.FormEditDashboard;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -14,11 +12,11 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Selenide.localStorage;
+import static com.codeborne.selenide.Selenide.open;
 
 public class DashboardsPage {
 
-    FormEditDashboard formEditDashboard = new FormEditDashboard();
-    FormDelete formDelete = new FormDelete();
     Alerts alert = new Alerts();
 
     //dashboards page header elements
@@ -46,7 +44,7 @@ public class DashboardsPage {
     }
 
     public SelenideElement getWidgetByName(String widgetName) {
-        return widgetsList.findBy(text(widgetName));
+        return widgetsList.find(text(widgetName));
     }
 
     private SelenideElement getWidgetActionsButton(String widgetName) {
@@ -79,7 +77,15 @@ public class DashboardsPage {
     //endregion
 
     //region Dashboards page header steps
-    @Step("New dashboard button click")
+    @Step("Open dashboard page")
+    public DashboardsPage openDashboardPage(String dashboardUrl) {
+        open("/favicon.ico");
+        localStorage().setItem("AS_AUTH_2", System.getProperty("AUTH_2"));
+        open(dashboardUrl);
+        return this;
+    }
+
+    @Step("'New dashboard' button click")
     public DashboardsPage clickNewDashboardButton() {
         newDashboardButton.click();
         return this;
@@ -142,7 +148,7 @@ public class DashboardsPage {
     //endregion
 
     //region Custom dashboard widgets steps
-    @Step("Add widget button click")
+    @Step("'Add widget' button click")
     public DashboardsPage addWidgetButtonClick() {
         addWidgetButton.click();
         return this;
@@ -200,23 +206,6 @@ public class DashboardsPage {
     @Step("Check that widget have 'Launch row list' content")
     public DashboardsPage checkWidgetHaveLaunchRowList(String widgetName) {
         getWidgetByName(widgetName).$(".list").should(visible);
-        return this;
-    }
-    //endregion
-
-    //region Grouped steps
-    @Step("Add new dashboard")
-    public DashboardsPage addNewDashboard(String dashboardName) {
-        this.clickNewDashboardButton();
-        formEditDashboard.setNameInput(dashboardName)
-                .clickSubmitButton();
-        return this;
-    }
-
-    @Step("Delete dashboard")
-    public DashboardsPage deleteDashboard() {
-        this.selectDashboardAction(DashboardActionItem.DELETE_DASHBOARD);
-        formDelete.clickDeleteButton();
         return this;
     }
     //endregion

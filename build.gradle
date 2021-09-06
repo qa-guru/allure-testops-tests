@@ -5,7 +5,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven {url = "https://dl.bintray.com/qameta/maven-unstable/"}
+    maven { url = "https://dl.bintray.com/qameta/maven-unstable/" }
 }
 
 def allureVersion = "2.13.9",
@@ -31,6 +31,8 @@ dependencies {
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.aeonbits.owner:owner:1.0.12",
             "org.assertj:assertj-core:3.19.0",
+            "com.fasterxml.jackson.core:jackson-databind:2.12.5",
+            "com.fasterxml.jackson.core:jackson-annotations:2.10.3",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion",
             "org.junit.jupiter:junit-jupiter-params:$junitVersion")
     testRuntimeOnly(

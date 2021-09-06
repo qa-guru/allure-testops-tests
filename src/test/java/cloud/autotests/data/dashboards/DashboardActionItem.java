@@ -6,6 +6,7 @@ public enum DashboardActionItem {
     EDIT_DASHBOARD("Edit dashboard"),
     DELETE_DASHBOARD("Delete dashboard");
 
+
     private final String displayedName;
 
     DashboardActionItem(String displayedName) {
