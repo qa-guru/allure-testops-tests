@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 public class ProjectTests extends TestBase {
 
     private static final String PROJECT_NAME = "teacher qa_guru_diplom_project";
+    private static final String SEARCH_QUERY = "c06-denis-symssg";
 
     @WithLogin
     @Test
@@ -31,5 +32,14 @@ public class ProjectTests extends TestBase {
         projectPage.getSidebar().navigateTo(MenuItem.TEST_CASES);
         TestCasesTable casesTable = new TestCasesTable();
         casesTable.shouldHaveSize(13);
+    }
+
+    @WithLogin
+    @Test
+    void searchAndGoToProjectFromAProjectSidebar() {
+        ProjectsTable projectsTable = open("", ProjectsTable.class);
+        ProjectPage projectPage = projectsTable.navigateTo(PROJECT_NAME);
+        projectPage.projectSearch(SEARCH_QUERY);
+        projectPage.checkTitle(SEARCH_QUERY);
     }
 }

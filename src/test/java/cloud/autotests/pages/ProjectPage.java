@@ -52,4 +52,12 @@ public class ProjectPage {
     public void checkTitle(String title) {
         $(".ProjectDashboards__title a").shouldHave(text(title));
     }
+
+    @Step("Search: open projects search from sidebar on project home page")
+    public void projectSearch(String searchQuery) {
+        $(".ProjectMenu__name").click();
+        $(".Input").setValue(searchQuery);
+        $$(".ProjectMenu__menu > div > a.Menu__link > div.Menu__item")
+                .find(exactText(searchQuery)).click();
+    }
 }
