@@ -23,13 +23,13 @@ public class ProjectsListPage {
     public ProjectPage createNewProject(String projectName) {
 //    public ProjectPage createNewProject(String projectName, boolean isPublic) { // todo
         step("Click on a button 'New project'", () ->
-                $("button.Button_style_success").click()
+                $("button.Button_shape_rectangular.HomeLayout__button").click()
         );
         step("Fill obligatory fields name with {projectName} and abbreviation with {projectAbbr}", () ->
                 $("input[name=name]").setValue(projectName)
         );
         step("Click submit, creating {projectName} project", () ->
-                $("button.Button_style_success[type=submit]").click()
+                $("button.Button_style_primary[type=submit]").click()
         );
         return new ProjectPage();
     }

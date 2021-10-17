@@ -5,7 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$;
 
 public class Sidebar {
@@ -15,7 +15,7 @@ public class Sidebar {
 
     @Step("Navigate to menu item `{menuName}`")
     public void navigateTo(MenuItem menuName) {
-        menuItems.find(text(menuName.getDisplayedName())).click();
+        menuItems.find(attribute("aria-label", menuName.getDisplayedName())).click();
     }
 
 }
