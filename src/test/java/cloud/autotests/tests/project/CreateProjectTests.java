@@ -30,7 +30,8 @@ public class CreateProjectTests extends TestBase {
                 (new Faker()).random().hex(6);
 
         projectsListPage
-                .openPage()
+                //todo вернуть, когда api аитентификация заработает
+                //.openPage()
                 .createNewProject(projectName);
         projectPage.checkTitle(projectName);
     }
