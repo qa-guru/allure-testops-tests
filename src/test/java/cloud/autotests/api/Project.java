@@ -1,6 +1,7 @@
 package cloud.autotests.api;
 
 import cloud.autotests.api.Authorization;
+import cloud.autotests.api.model.ProjectResponse;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
@@ -25,5 +26,9 @@ public class Project {
                         .body("name", is(projectName))
                         .body("isPublic", is(isPublic))
                         .extract().response();
+    }
+    public ProjectResponse createProject2(String projectName, boolean isPublic) {
+        Response response = createProject(projectName, isPublic);
+        return response.as(ProjectResponse.class);
     }
 }
