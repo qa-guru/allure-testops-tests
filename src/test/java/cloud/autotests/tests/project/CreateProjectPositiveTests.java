@@ -11,7 +11,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 @Story("Project tests")
-public class CreateProjectTests extends TestBase {
+public class CreateProjectPositiveTests extends TestBase {
 
     @AfterEach
     void deleteProject() {
@@ -44,18 +44,5 @@ public class CreateProjectTests extends TestBase {
         projectPage
                 .openPage(projectId)
                 .checkTitle(projectName);
-    }
-
-    @WithLogin
-    @Test
-    void projectCantBeCreatedWithEmptyName() {
-        String projectName = "";
-        String errorMessage = "Name is required";
-
-        projectsListPage
-                .openPage()
-                .createNewProject(projectName);
-
-        projectsListPage.getCreateProjectPopup().checkErrorMessage(errorMessage);
     }
 }

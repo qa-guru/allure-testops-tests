@@ -3,6 +3,7 @@ package cloud.autotests.pages;
 import cloud.autotests.pages.components.CreateProjectPopup;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
@@ -28,15 +29,28 @@ public class ProjectsListPage {
     public ProjectPage createNewProject(String projectName) {
 //    public ProjectPage createNewProject(String projectName, boolean isPublic) { // todo
         step("Click on a button 'New project'", () ->
-                $("button.Button_style_success").click()
+                $(byText("New project")).click()
         );
         step("Fill obligatory fields name with {projectName} and abbreviation with {projectAbbr}", () ->
                 $("input[name=name]").setValue(projectName)
         );
         step("Click submit, creating {projectName} project", () ->
-                $("button.Button_style_success[type=submit]").click()
+                $(byText("Submit")).click()
         );
         return new ProjectPage();
+    }
+
+    @Step("Creating a new project from a main page")
+    public void createNewProjectWithError(String projectName) {
+        step("Click on a button 'New project'", () ->
+                $(byText("New project")).click()
+        );
+        step("Fill obligatory fields name with {projectName} and abbreviation with {projectAbbr}", () ->
+                $("input[name=name]").setValue(projectName)
+        );
+        step("Click submit, creating {projectName} project", () ->
+                $(byText("Submit")).click()
+        );
     }
 
     public void filterProject(String projectName) {
