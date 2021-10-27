@@ -1,5 +1,6 @@
 package cloud.autotests.pages;
 
+import cloud.autotests.pages.components.CreateProjectPopup;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -8,6 +9,8 @@ import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
 public class ProjectsListPage {
+
+    private CreateProjectPopup createProjectPopup = new CreateProjectPopup();
 
     @Step("Open projects list page")
     public ProjectsListPage openPage() {
@@ -18,6 +21,8 @@ public class ProjectsListPage {
     public ProjectsTable getProjectsTable() {
         return new ProjectsTable();
     }
+
+    public CreateProjectPopup getCreateProjectPopup() {return new CreateProjectPopup();}
 
     @Step("Creating a new project from a main page")
     public ProjectPage createNewProject(String projectName) {
