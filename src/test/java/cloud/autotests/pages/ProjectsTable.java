@@ -25,6 +25,10 @@ public class ProjectsTable {
         return new ProjectPage();
     }
 
+    public int getProjectTableSize() {
+        return tableRows.size();
+    }
+
     @Step("Enter project name in Search field")
     public ProjectsTable searchProject(String searchValue) {
         searchField.val(searchValue);
