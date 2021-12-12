@@ -30,11 +30,14 @@ dependencies {
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.aeonbits.owner:owner:1.0.12",
             "com.github.javafaker:javafaker:1.0.2",
+            'com.fasterxml.jackson.core:jackson-databind:2.13.0',
             "org.assertj:assertj-core:3.19.0",
             "org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.29",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testCompileOnly 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
 }
 
 tasks.withType(JavaCompile) {

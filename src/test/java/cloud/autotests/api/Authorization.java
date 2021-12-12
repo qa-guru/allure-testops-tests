@@ -1,9 +1,9 @@
 package cloud.autotests.api;
 
-import cloud.autotests.config.App;
 import cloud.autotests.helpers.AllureRestAssuredFilter;
 import io.restassured.response.Response;
 
+import static cloud.autotests.config.App.config;
 import static io.restassured.RestAssured.given;
 
 public class Authorization {
@@ -13,7 +13,7 @@ public class Authorization {
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .formParam("grant_type", "apitoken")
                 .formParam("scope", "openid")
-                .formParam("token", App.config.userToken())
+                .formParam("token", config.userToken())
                 .when()
                 .post("/api/uaa/oauth/token")
                 .then()
@@ -31,8 +31,8 @@ public class Authorization {
                 .filter(AllureRestAssuredFilter.withCustomTemplates())
                 .header("X-XSRF-TOKEN", xsrfToken)
                 .header("Cookie", "XSRF-TOKEN=" + xsrfToken)
-                .formParam("username", App.config.userLogin())
-                .formParam("password", App.config.userPassword())
+                .formParam("username", config.userLogin())
+                .formParam("password", config.userPassword())
                 .when()
                 .post("/api/login/system")
                 .then()
