@@ -36,8 +36,8 @@ public class ProjectsListPage {
 
     public void filterProject(String projectName) {
         step("confirm the project {projectName} deletion", () -> {
-            $("input.HomeLayout__search").setValue(projectName);
-            sleep(500); // иначе через раз падает
+            $("input.ProjectsListControlsBar__search").setValue(projectName);
+           // sleep(500); // иначе через раз падает
         });
     }
 }

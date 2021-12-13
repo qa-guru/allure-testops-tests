@@ -15,7 +15,7 @@ public class ProjectsTable {
 
     @Step("Navigate to project `{projectName}`")
     public ProjectPage navigateTo(String projectName) {
-        tableRows.find(text(projectName)).$(".ProjectCard__name > a").click();
+        tableRows.find(text(projectName)).$(".ProjectRow__name > a").click();
         return new ProjectPage();
     }
 

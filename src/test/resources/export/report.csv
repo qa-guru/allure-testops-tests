@@ -1,0 +1,2 @@
+﻿"ID";"NAME";"DESCRIPTION";"PRECONDITION";"EXPECTED_RESULT";"STATUS";"SCENARIO";"TAG";"EPIC";"FEATURE";"STORY";"COMPONENT";"SUITE";"OWNER";"LEAD";"EXAMPLE"
+"1208";"2) Проверка работы слайдера на главной странице";"";"";"";"Active";"";"web";"";"";"";"";"tests.WGTests";"zhuravel";"";""

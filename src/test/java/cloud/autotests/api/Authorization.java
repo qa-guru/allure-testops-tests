@@ -22,6 +22,21 @@ public class Authorization {
     }
 
     public String getAccessToken() {
-      return getAuthorizationResponse().path("access_token");
+        return getAuthorizationResponse().path("access_token");
+    }
+
+    public Response authorizationViaApi() {
+        String xsrfToken = getAuthorizationResponse().getBody().jsonPath().get("jti");
+        return given()
+                .filter(AllureRestAssuredFilter.withCustomTemplates())
+                .header("X-XSRF-TOKEN", xsrfToken)
+                .header("Cookie", "XSRF-TOKEN=" + xsrfToken)
+                .formParam("username", App.config.userLogin())
+                .formParam("password", App.config.userPassword())
+                .when()
+                .post("/api/login/system")
+                .then()
+                .statusCode(200)
+                .extract().response();
     }
 }
