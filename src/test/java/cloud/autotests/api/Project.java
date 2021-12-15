@@ -37,7 +37,7 @@ public class Project {
                 .body(projectRequest)
                 .post("/api/rs/project")
                 .then()
-                .log().body()
+                .spec(responseSpec)
                 .statusCode(200)
                 .extract().as(CreateProjectResponse.class);
     }

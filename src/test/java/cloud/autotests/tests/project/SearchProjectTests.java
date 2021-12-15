@@ -9,6 +9,8 @@ import com.github.javafaker.Faker;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -21,29 +23,32 @@ class SearchProjectTests extends TestBase {
     @Test
     @WithLogin
     @CreateProject(isPublic = true)
+    @Tags({@Tag("web"), @Tag("search")})
     @DisplayName("Find project by the project name with visibility true")
     void findProjectByName(CreateProjectResponse project) {
-        ProjectsListPage projectPage = open("/", ProjectsListPage.class);
-        projectPage.typeProjectNameIntoSearchField(project.getName())
+        ProjectsListPage projectsListPage = open("/", ProjectsListPage.class);
+        projectsListPage.typeProjectNameIntoSearchField(project.getName())
                 .checkTheProjectIsDisplayed(project.getName());
     }
 
     @Test
     @WithLogin
     @CreateProject(isPublic = false)
+    @Tags({@Tag("web"), @Tag("search")})
     @DisplayName("Find project by the project name with visibility false")
     void findProjectByNameWithVisibilityFalse(CreateProjectResponse project) {
-        ProjectsListPage projectPage = open("/", ProjectsListPage.class);
-        projectPage.typeProjectNameIntoSearchField(project.getName())
+        ProjectsListPage projectsListPage = open("/", ProjectsListPage.class);
+        projectsListPage.typeProjectNameIntoSearchField(project.getName())
                 .checkTheProjectIsDisplayed(project.getName());
     }
 
     @Test
     @WithLogin
+    @Tags({@Tag("web"), @Tag("search")})
     @DisplayName("Find project by none existent project name")
     void findProjectByNoneExistentName() {
-        ProjectsListPage projectPage = open("/", ProjectsListPage.class);
-        projectPage.typeProjectNameIntoSearchField(new Faker().funnyName().name())
+        ProjectsListPage projectsListPage = open("/", ProjectsListPage.class);
+        projectsListPage.typeProjectNameIntoSearchField(new Faker().funnyName().name())
                 .verifyNoProjectsFoundMessage();
     }
 }

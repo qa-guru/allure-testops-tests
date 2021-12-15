@@ -1,5 +1,6 @@
 package cloud.autotests.tests;
 
+import cloud.autotests.api.services.DashboardService;
 import cloud.autotests.config.App;
 import cloud.autotests.config.Project;
 import cloud.autotests.helpers.AllureAttachments;
@@ -24,6 +25,7 @@ public class TestBase {
     protected ProjectsListPage projectsListPage = new ProjectsListPage();
     protected ProjectPage projectPage = new ProjectPage();
 
+    protected DashboardService dashboardService = new DashboardService();
 
     @BeforeAll
     static void setUp() {

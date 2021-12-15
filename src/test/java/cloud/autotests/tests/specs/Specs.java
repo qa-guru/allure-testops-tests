@@ -10,13 +10,13 @@ import io.restassured.specification.ResponseSpecification;
 public class Specs {
 
     public static final RequestSpecification requestSpec = new RequestSpecBuilder()
-            .log(LogDetail.ALL)
+            .log(LogDetail.BODY)
             .addHeader("Authorization", "Bearer " + new Authorization().getAccessToken())
             .addHeader("Content-Type", "application/json; charset=utf-8")
             .build();
 
     public static final ResponseSpecification responseSpec = new ResponseSpecBuilder()
-            .log(LogDetail.ALL)
+            .log(LogDetail.BODY)
             .build();
 
 }
