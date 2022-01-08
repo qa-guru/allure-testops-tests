@@ -2,6 +2,7 @@ package cloud.autotests.tests;
 
 import cloud.autotests.config.App;
 import cloud.autotests.helpers.AllureRestAssuredFilter;
+import cloud.autotests.pages.LoginPage;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,21 @@ import static io.restassured.RestAssured.given;
 
 @Story("Login tests")
 public class LoginTests extends TestBase {
+
+    LoginPage loginPage = new LoginPage();
+
+    @Test
+    @DisplayName("")
+    void openTest() {
+        step("Open login page", () ->
+                open(""));
+    }
+
+    @Test
+    @DisplayName("")
+    void openPageTest() {
+       loginPage.openLoginPage();
+    }
 
     @Test
     @DisplayName("Successful login as testuser")
