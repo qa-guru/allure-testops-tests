@@ -1,6 +1,7 @@
 package cloud.autotests.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -14,11 +15,13 @@ public class LoginPage {
     private SelenideElement submitButton = $("[type='submit']");
     private SelenideElement signUpLink = $(".link");
 
+    @Step("Open login page")
     public LoginPage openLoginPage() {
         open("");
         return this;
     }
 
+    @Step("Check if page elements are present")
     public LoginPage assertLoginPageIsDisplayed() {
         logo.shouldBe(visible);
         nameInput.shouldBe(visible);
@@ -28,6 +31,7 @@ public class LoginPage {
         return this;
     }
 
+    @Step("Click on sign up link")
     public void clickSignUpLink() {
         signUpLink.click();
     }
