@@ -22,6 +22,17 @@ public class LoginPageTests extends TestBase {
     }
 
     @Test
+    @DisplayName("Open login page")
+    void enterIncorrectCredentials() {
+        loginPage
+                .openLoginPage()
+                .enterUsername("123")
+                .enterPassword("123")
+                .clickSubmit()
+                .assertNameErrorIsDisplayed();
+    }
+
+    @Test
     @DisplayName("Open sign up page")
     void openSignUpPage() {
         loginPage

@@ -16,6 +16,7 @@ public class SignUpPage {
     private SelenideElement passwordInput = $("[name='password']");
     private SelenideElement repeatPasswordInput = $("[name='passwordRepeat']");
     private SelenideElement submitButton = $("[type='submit']");
+    private SelenideElement signInLink = $("[href='/login']");
 
     @Step("Open sign up page")
     public SignUpPage openSignUpPage() {
@@ -32,6 +33,8 @@ public class SignUpPage {
         passwordInput.shouldBe(visible);
         passwordInput.shouldBe(visible);
         repeatPasswordInput.shouldBe(visible);
+        submitButton.shouldBe(visible);
+        signInLink.shouldBe(visible);
         return this;
     }
 }
