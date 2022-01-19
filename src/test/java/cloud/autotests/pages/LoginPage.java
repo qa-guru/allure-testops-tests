@@ -3,6 +3,7 @@ package cloud.autotests.pages;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.*;
 import static org.assertj.core.api.Assertions.*;
 import static com.codeborne.selenide.Condition.*;
@@ -51,8 +52,8 @@ public class LoginPage {
 
     @Step("Assert that input errors are displayed")
     public LoginPage assertNameErrorIsDisplayed() {
-        assertThat($(".Form__error").is(visible));
-        assertThat($$(".Form__error").size()).isEqualTo(2);
+        $(".Form__error").shouldBe(visible);
+        $$(".Form__error").shouldHave(size(2));
         return this;
     }
 
