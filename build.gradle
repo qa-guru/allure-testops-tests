@@ -5,12 +5,11 @@ plugins {
 
 repositories {
     mavenCentral()
-        maven {url = "https://dl.bintray.com/qameta/maven-unstable/"}
 }
 
-def allureVersion = "2.15.0",
-    selenideVersion = "5.25.0",
-    junitVersion = "5.8.1"
+def allureVersion = "2.13.9",
+    selenideVersion = "5.22.2",
+    junitVersion = "5.7.2"
 
 allure {
     version = allureVersion
@@ -24,16 +23,17 @@ allure {
 
 dependencies {
     testImplementation(
-            "org.aspectj:aspectjweaver:1.9.7",
+            "org.aspectj:aspectjweaver:1.9.6",
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
-            "io.rest-assured:rest-assured:4.4.0",
+            "io.rest-assured:rest-assured:4.3.1",
             "io.qameta.allure:allure-rest-assured:$allureVersion",
             "org.aeonbits.owner:owner:1.0.12",
-            "org.assertj:assertj-core:3.21.0",
+            "com.github.javafaker:javafaker:1.0.2",
+            "org.assertj:assertj-core:3.19.0",
             "org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly(
-            "org.slf4j:slf4j-simple:1.7.32",
+            "org.slf4j:slf4j-simple:1.7.29",
             "org.junit.jupiter:junit-jupiter-engine:$junitVersion")
 }
 

@@ -7,7 +7,8 @@ public enum MenuItem {
     LAUNCHES("Launches"),
     ANALYTICS("Analytics"),
     DEFECTS("Defects"),
-    JOBS("Jobs");
+    JOBS("Jobs"),
+    SETTINGS("Settings");
 
     private final String displayedName;
 
