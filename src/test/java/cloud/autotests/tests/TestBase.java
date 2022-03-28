@@ -6,11 +6,12 @@ import cloud.autotests.helpers.AllureAttachments;
 import cloud.autotests.helpers.DriverSettings;
 import cloud.autotests.helpers.DriverUtils;
 import cloud.autotests.helpers.ExtendedSelenideListener;
-import com.codeborne.selenide.Configuration;
+import cloud.autotests.pages.LoginPage;
+import cloud.autotests.pages.ProjectPage;
+import cloud.autotests.pages.ProjectsListPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.junit5.AllureJunit5;
-import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,6 +21,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 @ExtendWith({AllureJunit5.class})
 public class TestBase {
+
+    protected final LoginPage loginPage = new LoginPage();
+    protected final ProjectsListPage projectsListPage = new ProjectsListPage();
+    protected final ProjectPage projectPage = new ProjectPage();
+
+
     @BeforeAll
     static void setUp() {
         DriverSettings.configure();

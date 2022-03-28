@@ -7,7 +7,9 @@ public enum MenuItem {
     LAUNCHES("Launches"),
     ANALYTICS("Analytics"),
     DEFECTS("Defects"),
-    JOBS("Jobs");
+    JOBS("Jobs"),
+    SETTINGS("Settings"),
+    USER_MENU("User menu");
 
     private final String displayedName;
 
@@ -19,9 +21,9 @@ public enum MenuItem {
         return displayedName;
     }
 
-
     @Override
     public String toString() {
         return displayedName;
     }
+
 }
