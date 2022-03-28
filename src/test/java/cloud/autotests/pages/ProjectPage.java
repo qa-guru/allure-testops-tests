@@ -22,9 +22,8 @@ public class ProjectPage {
 
 
     @Step("Open project by id `{projectId}`")
-    public ProjectPage openPage(Integer projectId) {
+    public void openPage(Integer projectId) {
         open("/project/" + projectId);
-        return this;
     }
 
     @Step("Get Sidebar")
@@ -47,7 +46,7 @@ public class ProjectPage {
         $$("button.Button_style_danger").find(exactText("Delete")).click();
     }
 
-    @Step("Check title has text `{title}`")
+    @Step("Verify title has text [{title}]")
     public void checkTitle(String title) {
         $(".ProjectDashboards__title a").shouldHave(text(title));
     }
