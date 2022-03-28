@@ -3,50 +3,61 @@ package cloud.autotests.tests.project;
 import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.api.project.ProjectRequestBody;
 import cloud.autotests.api.project.ProjectRequestBodyBuilder;
-import cloud.autotests.data.MenuItem;
-import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.config.App;
 import cloud.autotests.tests.TestBase;
-import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 @Story("Project tests")
+@Feature("Create project")
 public class CreateProjectTests extends TestBase {
 
-    @AfterEach
-    void deleteProject() {
-        projectPage.getSidebar().navigateTo(MenuItem.SETTINGS);
-        projectPage.deleteProject();
+    private final String projectName = "testuser-testproject-" + faker.random().hex(6);
+    private Integer projectId;
+
+    @BeforeEach // ToDo заменить на @WithLogin
+    void signInToAccount() {
+        // Arrange
+        loginPage.open();
+        loginPage.signIn(App.config.userLogin(), App.config.userPassword());
     }
 
-    @WithLogin
-    @Test
-    void projectShouldBeCreatedByUi() {
-        String projectName = "testuser-testproject-toBeDeleted" +
-                (new Faker()).random().hex(6);
+    @AfterEach
+    void removeProject() {
+        if (projectId == null)
+            throw new RuntimeException("Variable [projectId] is not defined");
 
-        projectsListPage
-                .openPage()
-                .createNewProject(projectName);
+        // Cleaning data
+        ProjectApi.removeProject(projectId);
+    }
+
+    @Test
+    @DisplayName("Create new project by UI")
+    void createNewProjectByUI() {
+        // Act
+        projectsListPage.createNewProject(projectName);
+        projectId = ProjectApi.getProjectId(projectName);
+
+        // Assert
         projectPage.checkTitle(projectName);
     }
 
-    @WithLogin
     @Test
-    void projectShouldBeCreatedByApi() {
+    @DisplayName("Create new project by API")
+    void createProjectByApi() {
+        // Test data
         ProjectRequestBody requestBody = ProjectRequestBodyBuilder.builder()
-                .addProjectName("testuser-testproject-toBeDeleted" + (new Faker()).random().hex(6))
+                .addProjectName(projectName)
                 .addIsPublic(true)
                 .build();
 
-        Response createProjectResponse = ProjectApi.createProject(requestBody);
-        Integer projectId = createProjectResponse.path("id");
+        // Act
+        projectId = ProjectApi.createProjectAndGetId(requestBody);
+        projectPage.openPage(projectId);
 
-        projectPage
-                .openPage(projectId)
-                .checkTitle(requestBody.getProjectName());
+        // Assert
+        projectPage.checkTitle(requestBody.getProjectName());
     }
 
 }

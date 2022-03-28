@@ -22,7 +22,8 @@ public class ProjectTestsDynamic extends TestBase {
         String projectName = "testuser-testproject-toBeDeleted" + (new Faker()).random().hex(6);
         ProjectsListPage projectsListPage = new ProjectsListPage();
         projectsListPage.openPage();
-        ProjectPage projectPage = projectsListPage.createNewProject(projectName);
+        projectsListPage.createNewProject(projectName);
+        ProjectPage projectPage = new ProjectPage();
 
         //тест
         projectPage.getSidebar().navigateTo(MenuItem.SETTINGS);
