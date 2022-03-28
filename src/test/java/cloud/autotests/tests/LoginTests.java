@@ -35,6 +35,7 @@ public class LoginTests extends TestBase {
     @Test
     @DisplayName("Successful login with localStorage (API + UI)")
     void loginWithCookieTest() {
+
         step("Get auth token by API and set it to browser localstorage", () -> {
             String authorizationResponse =
                     given()
