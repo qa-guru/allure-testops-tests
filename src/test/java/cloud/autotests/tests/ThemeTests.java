@@ -24,6 +24,7 @@ public class ThemeTests extends TestBase {
         step("Open the main page", () ->
                 open(""));
         step("Install a " + beforeTheme + " theme", () -> {
+            // ToDo вынести в LocalStorageHelper
             localStorage().setItem("AS_THEME", beforeTheme);
             refresh();
         });
