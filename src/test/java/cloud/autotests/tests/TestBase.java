@@ -11,6 +11,7 @@ import cloud.autotests.pages.ProjectPage;
 import cloud.autotests.pages.ProjectsListPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.github.javafaker.Faker;
 import io.qameta.allure.junit5.AllureJunit5;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -25,7 +26,6 @@ public class TestBase {
     protected final LoginPage loginPage = new LoginPage();
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
-
 
     @BeforeAll
     static void setUp() {
