@@ -9,6 +9,7 @@ import cloud.autotests.helpers.ExtendedSelenideListener;
 import cloud.autotests.pages.LoginPage;
 import cloud.autotests.pages.ProjectPage;
 import cloud.autotests.pages.ProjectsListPage;
+import cloud.autotests.pages.TestCasePage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
@@ -28,6 +29,7 @@ public class TestBase {
     protected final LoginPage loginPage = new LoginPage();
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
+    protected final TestCasePage testCasePage = new TestCasePage();
 
     @BeforeAll
     static void setUp() {

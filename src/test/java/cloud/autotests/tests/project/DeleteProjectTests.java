@@ -1,8 +1,8 @@
 package cloud.autotests.tests.project;
 
 import cloud.autotests.api.project.ProjectApi;
-import cloud.autotests.api.project.ProjectRequestBody;
-import cloud.autotests.api.project.ProjectRequestBodyBuilder;
+import cloud.autotests.api.project.ProjectDto;
+import cloud.autotests.api.project.ProjectDtoBuilder;
 import cloud.autotests.data.MenuItem;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.TestBase;
@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DeleteProjectTests extends TestBase {
 
     private final String projectName = "testuser-testproject-" + new Faker().random().hex(6);
-    private final ProjectRequestBody requestBody = ProjectRequestBodyBuilder.builder()
+    private final ProjectDto requestBody = ProjectDtoBuilder.builder()
             .addProjectName(projectName)
             .addIsPublic(true)
             .build();
