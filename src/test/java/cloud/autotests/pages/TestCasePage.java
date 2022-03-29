@@ -10,6 +10,8 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class TestCasePage {
 
+    public final TestCasesTable testCasesTable = new TestCasesTable();
+
     private final SelenideElement tagsSection = $(byText("Tags")).closest(".PaneSection");
 
     @Step("Open test case by id [{testCaseId}] on project by id [{projectId}]")
@@ -29,6 +31,12 @@ public class TestCasePage {
     public void checkThatTagsSectionContainsTag(String... tags) {
         for (String tag : tags)
             tagsSection.shouldHave(text(tag));
+    }
+
+    @Step("Verify tags section don't contains tag")
+    public void checkThatTagsSectionDoNotContainsTag(String... tags) {
+        for (String tag : tags)
+            tagsSection.shouldNotHave(text(tag));
     }
 
 }
