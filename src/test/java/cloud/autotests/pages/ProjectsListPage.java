@@ -15,9 +15,8 @@ public class ProjectsListPage {
     public final ProjectsTable projectTable = new ProjectsTable();
 
     @Step("Open projects list page")
-    public ProjectsListPage openPage() {
+    public void openPage() {
         open("");
-        return this;
     }
 
     @Step("Create new project with name [{projectName}]")
