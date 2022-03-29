@@ -7,7 +7,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.attribute;
-import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
@@ -16,24 +15,30 @@ import static io.restassured.RestAssured.given;
 public class LoginTests extends TestBase {
 
     @Test
-    @DisplayName("Successful login as testuser")
+    @DisplayName("Successful login to account")
     void loginTest() {
-        step("Open login page", () ->
-                open(""));
+        loginPage.open();
+        loginPage.signIn(App.config.userLogin(), App.config.userPassword());
 
-        step("Fill login form", () -> {
-            $(byName("username")).setValue(App.config.userLogin());
-            $(byName("password")).setValue((App.config.userPassword()))
-                    .pressEnter();
-        });
+        projectPage.getSidebar()
+                .checkThatUserAuthorizedAs(App.config.userLogin());
+    }
 
-        step("Verify successful authorization", () ->
-                $("img.Avatar__img").shouldHave(
-                        attribute("alt", App.config.userLogin())));
+    @Test
+    @DisplayName("Successful sign out from account")
+    void signOutTest() {
+        loginPage.open();
+        loginPage.signIn(App.config.userLogin(), App.config.userPassword());
+
+        projectPage.getSidebar()
+                .signOut();
+
+        loginPage.checkThatUserSignOut();
     }
 
     @Test
     @DisplayName("Successful login with localStorage (API + UI)")
+    // ToDo Not working + refactoring
     void loginWithCookieTest() {
         step("Get auth token by API and set it to browser localstorage", () -> {
             String authorizationResponse =
@@ -62,4 +67,5 @@ public class LoginTests extends TestBase {
                 $("img.Avatar__img").shouldHave(
                         attribute("alt", App.config.userLogin())));
     }
+
 }
