@@ -1,21 +1,38 @@
 package cloud.autotests.api.testCaseTag;
 
-public class TestCaseTagDto {
+import cloud.autotests.api.BaseDto;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    private int id;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
+public class TestCaseTagDto extends BaseDto {
+
+    public static TestCaseTagDto fromJson(String json) {
+        return GSON.fromJson(json, TestCaseTagDto.class);
     }
 
-    private String name;
-    public String getName() {
-        return name;
+    @Expose
+    @SerializedName("id")
+    private Integer tagId;
+    public int getTagId() {
+        return tagId;
     }
-    public void setName(String name) {
-        this.name = name;
+    void setTagId(int tagId) {
+        this.tagId = tagId;
+    }
+
+    @Expose
+    @SerializedName("name")
+    private String tagName;
+    public String getTagName() {
+        return tagName;
+    }
+    void setTagName(String tagName) {
+        this.tagName = tagName;
+    }
+
+    @Override
+    public String toJson() {
+        return GSON.toJson(this);
     }
 
 }
