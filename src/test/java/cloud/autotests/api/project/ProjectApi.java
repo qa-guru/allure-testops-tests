@@ -28,7 +28,7 @@ public class ProjectApi extends BaseApi {
 
     private static Response getCreateProjectResponse(ProjectDto requestBody) {
         return given().spec(defaultRequestSpec)
-                    .body(requestBody.toString())
+                    .body(requestBody.toJson())
                 .when()
                     .post(EndPoints.PROJECT)
                 .then()
