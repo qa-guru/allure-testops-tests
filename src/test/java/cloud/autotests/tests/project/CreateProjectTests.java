@@ -1,8 +1,8 @@
 package cloud.autotests.tests.project;
 
 import cloud.autotests.api.project.ProjectApi;
-import cloud.autotests.api.project.ProjectRequestBody;
-import cloud.autotests.api.project.ProjectRequestBodyBuilder;
+import cloud.autotests.api.project.ProjectDto;
+import cloud.autotests.api.project.ProjectDtoBuilder;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.TestBase;
 import io.qameta.allure.Feature;
@@ -59,7 +59,7 @@ public class CreateProjectTests extends TestBase {
     @DisplayName("Create new project by API")
     void createProjectByApi() {
         // Test data
-        ProjectRequestBody requestBody = ProjectRequestBodyBuilder.builder()
+        ProjectDto requestBody = ProjectDtoBuilder.builder()
                 .addProjectName(projectName)
                 .addIsPublic(true)
                 .build();
