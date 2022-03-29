@@ -19,8 +19,8 @@ public class DeleteProjectTests extends TestBase {
 
     private final String projectName = "testuser-testproject-" + new Faker().random().hex(6);
     private final ProjectDto requestBody = ProjectDtoBuilder.builder()
-            .addProjectName(projectName)
-            .addIsPublic(true)
+            .setProjectName(projectName)
+            .setIsPublic(true)
             .build();
     private Integer projectId;
 

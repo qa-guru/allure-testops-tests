@@ -60,8 +60,8 @@ public class CreateProjectTests extends TestBase {
     void createProjectByApi() {
         // Test data
         ProjectDto requestBody = ProjectDtoBuilder.builder()
-                .addProjectName(projectName)
-                .addIsPublic(true)
+                .setProjectName(projectName)
+                .setIsPublic(true)
                 .build();
 
         // Act
