@@ -3,8 +3,8 @@ package cloud.autotests.tests.project;
 import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.api.project.ProjectRequestBody;
 import cloud.autotests.api.project.ProjectRequestBodyBuilder;
-import cloud.autotests.config.App;
 import cloud.autotests.data.MenuItem;
+import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.TestBase;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Feature;
@@ -22,16 +22,10 @@ public class DeleteProjectTests extends TestBase {
             .addProjectName(projectName)
             .addIsPublic(true)
             .build();
-
     private Integer projectId;
 
     @BeforeEach
     void signInAndCreateProject() {
-        // ToDo заменить на @WithLogin
-        // Arrange
-        loginPage.open();
-        loginPage.signIn(App.config.userLogin(), App.config.userPassword());
-
         projectId = ProjectApi.createProjectAndGetId(requestBody);
         projectPage.openPage(projectId);
         projectPage.checkTitle(requestBody.getProjectName());
@@ -46,6 +40,7 @@ public class DeleteProjectTests extends TestBase {
     }
 
     @Test
+    @WithLogin
     @DisplayName("Delete project by UI")
     void deleteProjectByUI() {
         // Act
@@ -54,6 +49,7 @@ public class DeleteProjectTests extends TestBase {
     }
 
     @Test
+    @WithLogin
     @DisplayName("Delete project by Api")
     void deleteProjectByApi() {
         // Act
