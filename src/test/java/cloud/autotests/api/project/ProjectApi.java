@@ -1,6 +1,6 @@
 package cloud.autotests.api.project;
 
-import cloud.autotests.api.Authorization;
+import cloud.autotests.api.AuthorizationApi;
 import cloud.autotests.api.EndPoints;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
@@ -31,7 +31,7 @@ public class ProjectApi {
 
     private final static RequestSpecification defaultRequestSpec = new RequestSpecBuilder()
             .setContentType(JSON)
-            .addHeader("Authorization", "Bearer " + new Authorization().getAccessToken())
+            .addHeader("Authorization", "Bearer " + AuthorizationApi.getAccessToken())
             .build();
 
     private static Response getCreateProjectResponse(ProjectRequestBody requestBody) {
