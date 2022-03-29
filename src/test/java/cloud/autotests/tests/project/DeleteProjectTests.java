@@ -1,41 +1,63 @@
 package cloud.autotests.tests.project;
 
-import cloud.autotests.api.Project;
+import cloud.autotests.api.project.ProjectApi;
+import cloud.autotests.api.project.ProjectRequestBody;
+import cloud.autotests.api.project.ProjectRequestBodyBuilder;
+import cloud.autotests.config.App;
 import cloud.autotests.data.MenuItem;
-import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.TestBase;
 import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
-import static io.restassured.RestAssured.given;
-import static java.lang.String.format;
-import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Story("Project tests")
+@Feature("Delete project")
 public class DeleteProjectTests extends TestBase {
 
+    private final String projectName = "testuser-testproject-" + new Faker().random().hex(6);
+    private final ProjectRequestBody requestBody = ProjectRequestBodyBuilder.builder()
+            .addProjectName(projectName)
+            .addIsPublic(true)
+            .build();
 
-    @WithLogin
+    private Integer projectId;
+
+    @BeforeEach
+    void signInAndCreateProject() {
+        // ToDo заменить на @WithLogin
+        // Arrange
+        loginPage.open();
+        loginPage.signIn(App.config.userLogin(), App.config.userPassword());
+
+        projectId = ProjectApi.createProjectAndGetId(requestBody);
+        projectPage.openPage(projectId);
+        projectPage.checkTitle(requestBody.getProjectName());
+    }
+
+    @AfterEach
+    void checkThatProjectIsRemoved() {
+        // Assert
+        // Api-запрос возвращает null в том случае,
+        // если проекта [projectName] не существует
+        assertNull(ProjectApi.getProjectId(projectName));
+    }
+
     @Test
-    void projectShouldBeDeletedByUi() {
-        String projectName = "testuser-testproject-toBeDeleted" +
-                (new Faker()).random().hex(6);
-        boolean isPublic = true;
-
-        Response createProjectResponse = new Project().createProject(projectName, isPublic);
-        Integer projectId = createProjectResponse.path("id");
-
-        projectPage
-                .openPage(projectId)
-                .checkTitle(projectName);
-
-        // todo move to after fixture
+    @DisplayName("Delete project by UI")
+    void deleteProjectByUI() {
+        // Act
         projectPage.getSidebar().navigateTo(MenuItem.SETTINGS);
         projectPage.deleteProject();
+    }
 
-        // todo check test not appears in projects list results
+    @Test
+    @DisplayName("Delete project by Api")
+    void deleteProjectByApi() {
+        // Act
+        ProjectApi.removeProject(projectId);
     }
 
 }

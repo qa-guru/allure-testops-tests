@@ -3,6 +3,7 @@ package cloud.autotests.pages;
 import cloud.autotests.pages.components.CreateProjectPopup;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.$;
@@ -23,21 +24,18 @@ public class ProjectsListPage {
         return new ProjectsTable();
     }
 
-    public CreateProjectPopup getCreateProjectPopup() {return new CreateProjectPopup();}
+    @Step("Create new project with name [{projectName}]")
+    public void createNewProject(String projectName) {
+        $(byText("New project")).click();
+        $(byName("name")).setValue(projectName);
+        $(byName("submit")).click();
+    }
 
-    @Step("Creating a new project from a main page")
-    public ProjectPage createNewProject(String projectName) {
-//    public ProjectPage createNewProject(String projectName, boolean isPublic) { // todo
-        step("Click on a button 'New project'", () ->
-                $(byText("New project")).click()
-        );
-        step("Fill obligatory fields name with {projectName} and abbreviation with {projectAbbr}", () ->
-                $("input[name=name]").setValue(projectName)
-        );
-        step("Click submit, creating {projectName} project", () ->
-                $(byText("Submit")).click()
-        );
-        return new ProjectPage();
+    public void filterProject(String projectName) {
+        step("confirm the project {projectName} deletion", () -> {
+            $("input.HomeLayout__search").setValue(projectName);
+            sleep(500); // иначе через раз падает
+        });
     }
 
     @Step("Creating a new project from a main page")
@@ -53,10 +51,4 @@ public class ProjectsListPage {
         );
     }
 
-    public void filterProject(String projectName) {
-        step("confirm the project {projectName} deletion", () -> {
-            $("input.HomeLayout__search").setValue(projectName);
-            sleep(500); // иначе через раз падает
-        });
-    }
 }
