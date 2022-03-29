@@ -18,4 +18,8 @@ public class ProjectsTable {
         tableRows.find(text(projectName)).$(".ProjectCard__name > a").click();
         return new ProjectPage();
     }
+
+    public int getProjectTableSize() {
+        return tableRows.size();
+    }
 }
