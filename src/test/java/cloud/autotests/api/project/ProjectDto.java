@@ -3,7 +3,7 @@ package cloud.autotests.api.project;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
-public class ProjectRequestBody {
+public class ProjectDto {
 
     @SerializedName("name")
     private String projectName;

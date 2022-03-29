@@ -1,18 +1,15 @@
 package cloud.autotests.api.project;
 
-import cloud.autotests.api.AuthorizationApi;
+import cloud.autotests.api.BaseApi;
 import cloud.autotests.api.EndPoints;
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.*;
 import static org.hamcrest.CoreMatchers.is;
 
-public class ProjectApi {
+public class ProjectApi extends BaseApi {
 
-    public static Integer createProjectAndGetId(ProjectRequestBody requestBody) {
+    public static Integer createProjectAndGetId(ProjectDto requestBody) {
         return getCreateProjectResponse(requestBody).path("id");
     }
 
@@ -29,12 +26,7 @@ public class ProjectApi {
                     .statusCode(204);
     }
 
-    private final static RequestSpecification defaultRequestSpec = new RequestSpecBuilder()
-            .setContentType(JSON)
-            .addHeader("Authorization", "Bearer " + AuthorizationApi.getAccessToken())
-            .build();
-
-    private static Response getCreateProjectResponse(ProjectRequestBody requestBody) {
+    private static Response getCreateProjectResponse(ProjectDto requestBody) {
         return given().spec(defaultRequestSpec)
                     .body(requestBody.toString())
                 .when()
