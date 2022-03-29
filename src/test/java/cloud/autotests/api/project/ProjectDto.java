@@ -1,30 +1,37 @@
 package cloud.autotests.api.project;
 
-import com.google.gson.Gson;
+import cloud.autotests.api.BaseDto;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProjectDto {
+public class ProjectDto extends BaseDto {
 
+    public static ProjectDto fromJson(String json) {
+        return GSON.fromJson(json, ProjectDto.class);
+    }
+
+    @Expose
     @SerializedName("name")
     private String projectName;
     public String getProjectName() {
         return projectName;
     }
-    public void setProjectName(String projectName) {
+    void setProjectName(String projectName) {
         this.projectName = projectName;
     }
 
+    @Expose
     private Boolean isPublic;
     public boolean getIsPublic() {
         return isPublic;
     }
-    public void setIsPublic(boolean isPublic) {
+    void setIsPublic(boolean isPublic) {
         this.isPublic = isPublic;
     }
 
     @Override
-    public String toString() {
-        return new Gson().toJson(this);
+    public String toJson() {
+        return GSON.toJson(this);
     }
 
 }

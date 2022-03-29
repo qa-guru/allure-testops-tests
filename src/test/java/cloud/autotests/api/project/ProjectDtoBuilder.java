@@ -8,12 +8,12 @@ public class ProjectDtoBuilder {
         return new ProjectDtoBuilder();
     }
 
-    public ProjectDtoBuilder addProjectName(String projectName) {
+    public ProjectDtoBuilder setProjectName(String projectName) {
         projectDto.setProjectName(projectName);
         return this;
     }
 
-    public ProjectDtoBuilder addIsPublic(boolean isPublic) {
+    public ProjectDtoBuilder setIsPublic(boolean isPublic) {
         projectDto.setIsPublic(isPublic);
         return this;
     }
