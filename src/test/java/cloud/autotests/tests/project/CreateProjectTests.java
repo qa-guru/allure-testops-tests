@@ -25,11 +25,9 @@ public class CreateProjectTests extends TestBase {
 
     @AfterEach
     void removeProject() {
-        if (projectId == null)
-            throw new RuntimeException("Variable [projectId] is not defined");
-
         // Cleaning data
-        ProjectApi.removeProject(projectId);
+        if (projectId != null)
+            ProjectApi.removeProject(projectId);
     }
 
     @Test
@@ -41,6 +39,17 @@ public class CreateProjectTests extends TestBase {
 
         // Assert
         projectPage.checkTitle(projectName);
+    }
+
+    @Test
+    @DisplayName("Create new project with empty value of name field")
+    void createNewProjectWithEmptyName() {
+        // Act
+        projectsListPage.createNewProject("");
+
+        // Assert
+        projectsListPage.createProjectPopup
+                .checkThatEmptyNameFieldHasErrorMessage();
     }
 
     @Test

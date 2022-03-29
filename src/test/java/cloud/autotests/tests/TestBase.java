@@ -23,6 +23,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({AllureJunit5.class})
 public class TestBase {
 
+    protected final Faker faker = new Faker();
+
     protected final LoginPage loginPage = new LoginPage();
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
