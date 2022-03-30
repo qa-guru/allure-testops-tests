@@ -39,7 +39,7 @@ public class ProjectsListPage {
     }
 
     @Step("Verify project [{projectName}] contains in projects list")
-    public void checkThatProjectContainsInProjectsList(String projectName) {
+    public void checkThatProjectsListContainsProject(String projectName) {
         $$(".ProjectRow__name").shouldHave(itemWithText(projectName));
     }
 

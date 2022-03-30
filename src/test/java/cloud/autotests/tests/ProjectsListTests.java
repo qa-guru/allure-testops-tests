@@ -21,7 +21,7 @@ public class ProjectsListTests extends TestBase {
         projectsListPage.findProject(EXIST_PROJECT_NAME);
 
         // Assert
-        projectsListPage.checkThatProjectContainsInProjectsList(EXIST_PROJECT_NAME);
+        projectsListPage.checkThatProjectsListContainsProject(EXIST_PROJECT_NAME);
     }
 
 }
