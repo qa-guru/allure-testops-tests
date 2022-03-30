@@ -17,9 +17,9 @@ public enum DefectActionMenuItem {
         return displayedName;
     }
 
-
     @Override
     public String toString() {
         return displayedName;
     }
+
 }
