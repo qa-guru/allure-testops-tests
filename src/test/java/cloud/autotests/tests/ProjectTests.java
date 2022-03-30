@@ -9,6 +9,8 @@ import cloud.autotests.pages.TestCasesTable;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.open;
+
 @Story("Project tests")
 public class ProjectTests extends TestBase {
 
@@ -17,9 +19,7 @@ public class ProjectTests extends TestBase {
     @WithLogin
     @Test
     void projectPageShouldContains5Widgets() {
-        //todo заменить, когда api аитентификация заработает
-        //ProjectsListPage projectsListPage = open("", ProjectsListPage.class);
-        ProjectsListPage projectsListPage = new ProjectsListPage();
+        ProjectsListPage projectsListPage = open("", ProjectsListPage.class);
         projectsListPage.filterProject(PROJECT_NAME);
         ProjectsTable projectsTable = new ProjectsTable();
         ProjectPage projectPage = projectsTable.navigateTo(PROJECT_NAME);
@@ -29,9 +29,7 @@ public class ProjectTests extends TestBase {
     @WithLogin
     @Test
     void testcaseListDisplayedAfterNavigateBySidebar() {
-        //todo заменить, когда api аитентификация заработает
-        //ProjectsListPage projectsListPage = open("", ProjectsListPage.class);
-        ProjectsListPage projectsListPage = new ProjectsListPage();
+        ProjectsListPage projectsListPage = open("", ProjectsListPage.class);
         projectsListPage.filterProject(PROJECT_NAME);
         ProjectsTable projectsTable = new ProjectsTable();
         ProjectPage projectPage = projectsTable.navigateTo(PROJECT_NAME);

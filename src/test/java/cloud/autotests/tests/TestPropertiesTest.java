@@ -7,6 +7,8 @@ import cloud.autotests.pages.*;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
+import static com.codeborne.selenide.Selenide.open;
+
 @Story("Properties of Tests")
 public class TestPropertiesTest extends TestBase{
     private static final String PROJECT_NAME = "teacher qa_guru_diplom_project";
@@ -15,9 +17,7 @@ public class TestPropertiesTest extends TestBase{
     @WithLogin
     @Test
     void checkTestProperties(){
-        //todo заменить, когда api аитентификация заработает
-        //ProjectsListPage projectsListPage = open("", ProjectsListPage.class);
-        ProjectsListPage projectsListPage = new ProjectsListPage();
+        ProjectsListPage projectsListPage = open("", ProjectsListPage.class);
         projectsListPage.filterProject(PROJECT_NAME);
         ProjectsTable projectsTable = new ProjectsTable();
         ProjectPage projectPage = projectsTable.navigateTo(PROJECT_NAME);
