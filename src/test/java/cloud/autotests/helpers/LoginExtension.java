@@ -1,30 +1,22 @@
 package cloud.autotests.helpers;
 
-import cloud.autotests.api.Authorization;
-import cloud.autotests.config.App;
+import cloud.autotests.api.AuthorizationApi;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
+import org.openqa.selenium.Cookie;
 
-import static com.codeborne.selenide.Selectors.byName;
-import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$;
-import static io.qameta.allure.Allure.step;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class LoginExtension implements BeforeEachCallback {
+
     @Override
     public void beforeEach(ExtensionContext context) {
-        //todo вернуть обратно api авторизацию после восстановления ее работоспособности
-        open("");
-        step("Fill login form", () -> {
-            $(byName("username")).setValue(App.config.userLogin());
-            $(byName("password")).setValue((App.config.userPassword()))
-                    .pressEnter();
-        });
-
-       /* String authorizationResponse =
-                new Authorization().getAuthorizationResponse().asString();
+        String allureCookieName = "ALLURE_TESTOPS_SESSION";
+        String cookies = AuthorizationApi.getAuthorizationForUIResponse().getCookie(allureCookieName);
 
         open("/favicon.ico");
-        localStorage().setItem("AS_AUTH_2", authorizationResponse);*/
+        getWebDriver().manage().addCookie(new Cookie(allureCookieName, cookies));
     }
+
 }

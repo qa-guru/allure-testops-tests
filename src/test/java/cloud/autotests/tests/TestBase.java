@@ -6,10 +6,13 @@ import cloud.autotests.helpers.AllureAttachments;
 import cloud.autotests.helpers.DriverSettings;
 import cloud.autotests.helpers.DriverUtils;
 import cloud.autotests.helpers.ExtendedSelenideListener;
+import cloud.autotests.pages.LoginPage;
 import cloud.autotests.pages.ProjectPage;
 import cloud.autotests.pages.ProjectsListPage;
+import cloud.autotests.pages.TestCasePage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.github.javafaker.Faker;
 import io.qameta.allure.junit5.AllureJunit5;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.AfterEach;
@@ -21,9 +24,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @ExtendWith({AllureJunit5.class})
 public class TestBase {
 
-    protected ProjectsListPage projectsListPage = new ProjectsListPage();
-    protected ProjectPage projectPage = new ProjectPage();
+    protected final Faker faker = new Faker();
 
+    protected final LoginPage loginPage = new LoginPage();
+    protected final ProjectsListPage projectsListPage = new ProjectsListPage();
+    protected final ProjectPage projectPage = new ProjectPage();
+    protected final TestCasePage testCasePage = new TestCasePage();
 
     @BeforeAll
     static void setUp() {
