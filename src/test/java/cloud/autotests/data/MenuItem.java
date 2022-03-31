@@ -8,7 +8,8 @@ public enum MenuItem {
     ANALYTICS("Analytics"),
     DEFECTS("Defects"),
     JOBS("Jobs"),
-    SETTINGS("Settings");
+    SETTINGS("Settings"),
+    USER_MENU("User menu");
 
     private final String displayedName;
 
@@ -20,9 +21,9 @@ public enum MenuItem {
         return displayedName;
     }
 
-
     @Override
     public String toString() {
         return displayedName;
     }
+
 }

@@ -1,53 +1,75 @@
 package cloud.autotests.tests.project;
 
-import cloud.autotests.api.Project;
-import cloud.autotests.data.MenuItem;
+import cloud.autotests.api.project.ProjectApi;
+import cloud.autotests.api.project.ProjectDto;
+import cloud.autotests.api.project.ProjectDtoBuilder;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.TestBase;
-import com.github.javafaker.Faker;
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-
-import static io.restassured.RestAssured.given;
-import static java.lang.String.format;
-import static org.hamcrest.CoreMatchers.is;
+import org.junit.jupiter.api.*;
 
 @Story("Project tests")
+@Feature("Create project")
 public class CreateProjectTests extends TestBase {
 
+    private final String projectName = "testuser-testproject-" + faker.random().hex(6);
+    private Integer projectId;
+
     @AfterEach
-    void deleteProject() {
-        projectPage.getSidebar().navigateTo(MenuItem.SETTINGS);
-        projectPage.deleteProject();
+    void removeProject() {
+        // Cleaning data
+        // projectId != null, значит в рамках теста был создан новый проект, который нужно подчистить
+        if (projectId != null)
+            ProjectApi.removeProject(projectId);
     }
 
-    @WithLogin
     @Test
-    void projectShouldBeCreatedByUi() {
-        String projectName = "testuser-testproject-toBeDeleted" +
-                (new Faker()).random().hex(6);
+    @WithLogin
+    @DisplayName("Create new project by UI")
+    void createNewProjectByUI() {
+        // Arrange
+        projectsListPage.openPage();
 
-        projectsListPage
-                .openPage()
-                .createNewProject(projectName);
+        // Act
+        projectsListPage.createNewProject(projectName);
+        projectId = ProjectApi.getProjectId(projectName);
+
+        // Assert
         projectPage.checkTitle(projectName);
     }
 
-    @WithLogin
     @Test
-    void projectShouldBeCreatedByApi() {
-        String projectName = "testuser-testproject-toBeDeleted" +
-                (new Faker()).random().hex(6);
-        boolean isPublic = true;
+    @WithLogin
+    @DisplayName("Create new project with empty value of name field")
+    void createNewProjectWithEmptyName() {
+        // Arrange
+        projectsListPage.openPage();
 
-        Response createProjectResponse = new Project().createProject(projectName, isPublic);
-        Integer projectId = createProjectResponse.path("id");
+        // Act
+        projectsListPage.createNewProject("");
 
-        projectPage
-                .openPage(projectId)
-                .checkTitle(projectName);
+        // Assert
+        projectsListPage.createProjectPopup
+                .checkThatEmptyNameFieldHasErrorMessage();
+    }
+
+    @Test
+    @WithLogin
+    @DisplayName("Create new project by API")
+    void createProjectByApi() {
+        // Test data
+        ProjectDto requestBody = ProjectDtoBuilder.builder()
+                .setProjectName(projectName)
+                .setIsPublic(true)
+                .build();
+
+        // Act
+        projectId = ProjectApi.createProjectAndGetId(requestBody);
+        projectPage.openPage(projectId);
+
+        // Assert
+        projectPage.checkTitle(requestBody.getProjectName());
     }
 
 }
