@@ -1,43 +1,54 @@
 package cloud.autotests.pages;
 
+import cloud.autotests.pages.components.CreateProjectPopup;
+import com.codeborne.selenide.ElementsCollection;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class ProjectsListPage {
 
+    public final CreateProjectPopup createProjectPopup = new CreateProjectPopup();
+    public final ProjectsTable projectTable = new ProjectsTable();
+
+    private final ElementsCollection projectNamesCollection =  $$(".ProjectRow__name");
+
     @Step("Open projects list page")
-    public ProjectsListPage openPage() {
+    public void openPage() {
         open("");
-        return this;
     }
 
-    public ProjectsTable getProjectsTable() {
-        return new ProjectsTable();
+    @Step("Create new project with name [{projectName}]")
+    public void createNewProject(String projectName) {
+        $(byText("New project")).click();
+        createProjectPopup.fillNameField(projectName);
+        createProjectPopup.clickSubmitButton();
     }
 
-    @Step("Creating a new project from a main page")
-    public ProjectPage createNewProject(String projectName) {
-//    public ProjectPage createNewProject(String projectName, boolean isPublic) { // todo
-        step("Click on a button 'New project'", () ->
-                $("button.Button_style_success").click()
-        );
-        step("Fill obligatory fields name with {projectName} and abbreviation with {projectAbbr}", () ->
-                $("input[name=name]").setValue(projectName)
-        );
-        step("Click submit, creating {projectName} project", () ->
-                $("button.Button_style_success[type=submit]").click()
-        );
-        return new ProjectPage();
+    @Step("Find project [{projectName}]")
+    public void findProject(String projectName) {
+        $("[type='search']").setValue(projectName).pressEnter();
     }
 
+    // ToDo Refactoring
     public void filterProject(String projectName) {
         step("confirm the project {projectName} deletion", () -> {
             $("input.HomeLayout__search").setValue(projectName);
             sleep(500); // иначе через раз падает
         });
     }
+
+    @Step("Verify project [{projectName}] contains in projects list")
+    public void checkThatProjectsListContainsProject(String projectName) {
+        projectNamesCollection.find(text(projectName)).shouldBe(visible);
+    }
+
+    @Step("Verify project [{projectName}] don't contains in projects list")
+    public void checkThatProjectsListDoNotContainsProject(String projectName) {
+        projectNamesCollection.find(text(projectName)).shouldNotBe(visible);
+    }
+
 }
