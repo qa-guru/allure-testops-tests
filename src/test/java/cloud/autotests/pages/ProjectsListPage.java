@@ -3,7 +3,7 @@ package cloud.autotests.pages;
 import cloud.autotests.pages.components.CreateProjectPopup;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
@@ -40,7 +40,12 @@ public class ProjectsListPage {
 
     @Step("Verify project [{projectName}] contains in projects list")
     public void checkThatProjectsListContainsProject(String projectName) {
-        $$(".ProjectRow__name").shouldHave(itemWithText(projectName));
+        $$(".ProjectRow__name").find(text(projectName)).shouldBe(visible);
+    }
+
+    @Step("Verify project [{projectName}] don't contains in projects list")
+    public void checkThatProjectsListDoNotContainsProject(String projectName) {
+        $$(".ProjectRow__name").find(text(projectName)).shouldNotBe(visible);
     }
 
 }
