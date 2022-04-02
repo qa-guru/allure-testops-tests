@@ -84,9 +84,8 @@ public class DefectTests extends TestBase {
         // Assert
         defectsListPage.checkThatDefectsListDoNotContainsDefect(defect.getName());
 
-        // Повторение - мать учение =)
-        // Повторно присваиваю данной переменной значение null,
-        // тк удалять дефект через API не нужно (потому что мы его удалили через UI)
+        // Присваиваю createdDefectId = null,
+        // тк удалять дефект через API (в @AfterEach) не нужно (потому что мы его удалили через UI)
         createdDefectId = null;
     }
 

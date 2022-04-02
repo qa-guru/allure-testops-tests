@@ -28,9 +28,9 @@ public class DefectPage {
 
     @Step("Get (parse) defect id")
     public int getDefectId() {
-        String IdString = self.find(".Id").getText()
+        String idString = self.find(".Id").getText()
                 .replaceAll("[^0-9]", "");
-        return Integer.parseInt(IdString);
+        return Integer.parseInt(idString);
     }
 
     @Step("Edit defect name to [{newName}]")
