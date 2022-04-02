@@ -23,7 +23,7 @@ public class TestPropertiesTest extends TestBase{
         ProjectPage projectPage = projectsTable.navigateTo(PROJECT_NAME);
         projectPage.getSidebar().navigateTo(MenuItem.TEST_CASES);
 
-        TestCasesTable testCasesTable = new TestCasesTable();
+        TestCasesListPage testCasesTable = new TestCasesListPage();
         testCasesTable.navigateToTestByStatus(STATUS_NAME);
 
         TestProperties testProperties = new TestProperties();
