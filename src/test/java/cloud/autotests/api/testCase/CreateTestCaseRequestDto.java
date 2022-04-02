@@ -11,7 +11,11 @@ public class CreateTestCaseRequestDto implements RequestDto {
 
     @Expose
     @SerializedName("name")
-    private final String testCaseName;
+    private final String name;
+
+    @Expose
+    @SerializedName("description")
+    private final String description;
 
     @Expose
     @SerializedName("projectId")

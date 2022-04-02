@@ -11,6 +11,7 @@ public class EndPoints {
 
     // Test cases
     public static final String TEST_CASE = "/api/rs/testcase";
+    public static final String TEST_CASE_DELETE = TEST_CASE + "/{id}";
 
     // Defects
     public static final String DEFECT_CREATE = "/api/rs/defect";
