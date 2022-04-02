@@ -34,6 +34,8 @@ public class TestBase {
     protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
     protected final TestCasePage testCasePage = new TestCasePage();
 
+    protected final DashboardPage dashboardPage = new DashboardPage();
+
     @BeforeAll
     static void setUp() {
         DriverSettings.configure();
