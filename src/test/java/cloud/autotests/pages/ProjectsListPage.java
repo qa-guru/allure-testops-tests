@@ -1,6 +1,7 @@
 package cloud.autotests.pages;
 
 import cloud.autotests.pages.components.CreateProjectPopup;
+import com.codeborne.selenide.ElementsCollection;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
@@ -12,6 +13,8 @@ public class ProjectsListPage {
 
     public final CreateProjectPopup createProjectPopup = new CreateProjectPopup();
     public final ProjectsTable projectTable = new ProjectsTable();
+
+    private final ElementsCollection projectNamesCollection =  $$(".ProjectRow__name");
 
     @Step("Open projects list page")
     public void openPage() {
@@ -40,12 +43,12 @@ public class ProjectsListPage {
 
     @Step("Verify project [{projectName}] contains in projects list")
     public void checkThatProjectsListContainsProject(String projectName) {
-        $$(".ProjectRow__name").find(text(projectName)).shouldBe(visible);
+        projectNamesCollection.find(text(projectName)).shouldBe(visible);
     }
 
     @Step("Verify project [{projectName}] don't contains in projects list")
     public void checkThatProjectsListDoNotContainsProject(String projectName) {
-        $$(".ProjectRow__name").find(text(projectName)).shouldNotBe(visible);
+        projectNamesCollection.find(text(projectName)).shouldNotBe(visible);
     }
 
 }
