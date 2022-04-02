@@ -27,10 +27,12 @@ public class TestBase {
     protected final LoginPage loginPage = new LoginPage();
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
-    protected final TestCasePage testCasePage = new TestCasePage();
 
     protected final DefectsListPage defectsListPage = new DefectsListPage();
     protected final DefectPage defectPage = new DefectPage();
+
+    protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
+    protected final TestCasePage testCasePage = new TestCasePage();
 
     @BeforeAll
     static void setUp() {
