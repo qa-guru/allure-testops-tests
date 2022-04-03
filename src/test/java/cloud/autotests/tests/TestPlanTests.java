@@ -1,47 +1,62 @@
 package cloud.autotests.tests;
 
-import cloud.autotests.pages.TestPlansPage;
-import com.github.javafaker.Faker;
-import org.assertj.core.api.Assertions;
+import cloud.autotests.api.testPlan.CreateTestPlanRequestDto;
+import cloud.autotests.api.testPlan.TestPlanApi;
+import cloud.autotests.helpers.WithLogin;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
-import static org.assertj.core.api.Assertions.assertThat;
+public class TestPlanTests extends TestBase {
 
-public class TestPlanTests {
-    TestPlansPage testPlanPage = new TestPlansPage();
-    String testPlanName = "auto_regress_01_" + (new Faker()).random().hex(2);
+    // Test project [dont-remove-autotests-test-plans]
+    private final static int PROJECT_ID = 1178;
+    private final CreateTestPlanRequestDto testPlan = CreateTestPlanRequestDto.builder()
+            .name(faker.random().hex(20))
+            .projectId(PROJECT_ID)
+            .build();
 
-    // @WithLogin
     @Test
-    public void createTestPlan() {
-       /* ProjectResponse projectResponse = new Project().createProject2("Project for test plan creation " + System.currentTimeMillis(), true);
-        Integer idProject = projectResponse.getId();*/
-        Integer idProject = 591;//
-        open(String.format("https://allure.autotests.cloud/project/%s/testplans", idProject));
+    @WithLogin
+    @DisplayName("Create test plan")
+    void createTestPlan() {
+        // Test data
+        int projectTestCasesCount = 3;
 
-        //убрать логин через ui, когда будет работать авторизация через api
-        $x("//*[@name='username']").setValue("qaguru6");
-        $x("//*[@name='password']").setValue("qaguru");
-        $x("//*[@type='submit']").click();
+        // Arrange
+        testPlansListPage.openPage(PROJECT_ID);
 
-        testPlanPage.clickButtonNewTestPlan();
-        testPlanPage.enterNameNewTestPlan(testPlanName);
-        testPlanPage.pressButtonNext();
-        testPlanPage.pressButtonCreateTestPlan();
+        // Act
+        testPlansListPage.createNewTestPlan(testPlan.getName());
 
-        String message = testPlanPage.checkMessage();
-        Assertions.assertThat(message)
-                .as("")
-                .contains(String.format("Created %s", testPlanName));
+        // Assert
+        testPlanPage.checkThatSystemShowCreatedTestPlanPopup(testPlan.getName());
+        testPlanPage.checkThatTestPlanNameIs(testPlan.getName());
+        testPlanPage.checkThatTestPlanHasSize(projectTestCasesCount);
 
-        testPlanPage.goToPageTestPlans();
-        testPlanPage.findTestPlan(testPlanName);
+        // Act
+        int createdTestPlan = testPlanPage.getTestPlanId();
+        testPlansListPage.openPage(PROJECT_ID);
 
-        String idTestPlane = testPlanPage.getIdTestPlan();
+        // Assert
+        testPlansListPage.checkThatTestPlansListContainsTestPlan(testPlan.getName());
 
-        String link = testPlanPage.checkLinkTestPlan(testPlanName);
-        assertThat(link).isEqualTo("https://allure.autotests.cloud/testplan/" + idTestPlane + "");
+        // Cleaning data
+        TestPlanApi.deleteTestPlan(createdTestPlan);
     }
+
+    @Test
+    @WithLogin
+    @DisplayName("Delete test plan")
+    void deleteTestPlan() {
+        // Arrange
+        int createdTestPlan = TestPlanApi.createTestPlan(testPlan).getId();
+        testPlanPage.openPage(createdTestPlan);
+
+        // Act
+        testPlanPage.deleteTestPlan();
+
+        // Assert
+        testPlansListPage.checkThatTestPlansListDoNotContainsTestPlan(testPlan.getName());
+    }
+
 }
