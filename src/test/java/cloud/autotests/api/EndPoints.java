@@ -6,8 +6,9 @@ public class EndPoints {
         // использоваться будет в одном лишь месте
 
     // Projects
-    public static final String PROJECT = "/api/rs/project";
-    public static final String PROJECT_BY_ID = PROJECT + "/{id}";
+    public static final String PROJECT_CREATE = "/api/rs/project";
+    public static final String PROJECT_FIND_BY_NAME = "/api/rs/project";
+    public static final String PROJECT_BY_ID = PROJECT_CREATE + "/{id}";
 
     // Test cases
     public static final String TEST_CASE = "/api/rs/testcase";

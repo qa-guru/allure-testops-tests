@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.project;
 
 import cloud.autotests.pages.components.CreateProjectPopup;
 import com.codeborne.selenide.ElementsCollection;
@@ -12,8 +12,6 @@ import static io.qameta.allure.Allure.step;
 public class ProjectsListPage {
 
     public final CreateProjectPopup createProjectPopup = new CreateProjectPopup();
-    public final ProjectsTable projectTable = new ProjectsTable();
-
     private final ElementsCollection projectNamesCollection =  $$(".ProjectRow__name");
 
     @Step("Open projects list page")
@@ -33,7 +31,6 @@ public class ProjectsListPage {
         $("[type='search']").setValue(projectName).pressEnter();
     }
 
-    // ToDo Refactoring
     public void filterProject(String projectName) {
         step("confirm the project {projectName} deletion", () -> {
             $("input.HomeLayout__search").setValue(projectName);
