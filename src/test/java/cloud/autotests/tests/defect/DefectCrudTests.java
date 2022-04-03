@@ -7,11 +7,13 @@ import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.pages.defect.DefectPage;
 import cloud.autotests.pages.defect.DefectsListPage;
 import cloud.autotests.tests.TestBase;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static cloud.autotests.data.DefectActionMenuItem.*;
 
+@Story("Defect tests")
 public class DefectCrudTests extends TestBase {
 
     private final DefectsListPage defectsListPage = new DefectsListPage();

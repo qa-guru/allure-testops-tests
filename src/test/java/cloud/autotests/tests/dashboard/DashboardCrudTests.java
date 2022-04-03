@@ -5,10 +5,12 @@ import cloud.autotests.api.dashboard.DashboardApi;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.pages.dashboard.DashboardPage;
 import cloud.autotests.tests.TestBase;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@Story("Dashboard tests")
 public class DashboardCrudTests extends TestBase {
 
     private final DashboardPage dashboardPage = new DashboardPage();
