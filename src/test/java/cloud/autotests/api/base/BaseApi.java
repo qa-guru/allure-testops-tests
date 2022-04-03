@@ -1,5 +1,6 @@
-package cloud.autotests.api;
+package cloud.autotests.api.base;
 
+import cloud.autotests.api.authorization.AuthorizationApi;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.specification.RequestSpecification;
 
@@ -9,7 +10,7 @@ public class BaseApi {
 
     protected final static RequestSpecification defaultRequestSpec = new RequestSpecBuilder()
             .setContentType(JSON)
-            .addHeader("Authorization", "Bearer " + AuthorizationApi.getAccessToken())
+            .addHeader("Authorization", "Bearer " + AuthorizationApi.getAuthorization().getAccessToken())
             .build();
 
 }

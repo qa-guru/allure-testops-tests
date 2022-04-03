@@ -1,19 +1,14 @@
-package cloud.autotests.api;
+package cloud.autotests.api.authorization;
 
 import cloud.autotests.config.App;
 import cloud.autotests.helpers.AllureRestAssuredFilter;
-import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
 public class AuthorizationApi {
 
-    public static String getAccessToken() {
-        return getAuthorizationForApiResponse().path("access_token");
-    }
-
-    public static Response getAuthorizationForApiResponse() {
-        return given()
+    public static AuthorizationResponseDto getAuthorization() {
+        String json = given()
                     .filter(AllureRestAssuredFilter.withCustomTemplates())
                     .formParam("grant_type", "apitoken")
                     .formParam("scope", "openid")
@@ -22,12 +17,12 @@ public class AuthorizationApi {
                     .post("/api/uaa/oauth/token")
                 .then()
                     .statusCode(200)
-                    .extract()
-                    .response();
+                    .extract().response().asString();
+        return AuthorizationResponseDto.fromJson(json);
     }
 
-    public static Response getAuthorizationForUIResponse() {
-        String xsrfToken = getAuthorizationForApiResponse().getBody().jsonPath().get("jti");
+    public static String getAuthorizationCookie() {
+        String xsrfToken = getAuthorization().getJti();
         return given()
                     .filter(AllureRestAssuredFilter.withCustomTemplates())
                     .header("X-XSRF-TOKEN", xsrfToken)
@@ -37,8 +32,8 @@ public class AuthorizationApi {
                 .when()
                     .post("/api/login/system")
                 .then()
-                    .statusCode(200)
-                    .extract()
-                    .response();
+                    .statusCode(200).extract().response()
+                    .getCookie("ALLURE_TESTOPS_SESSION");
     }
+
 }
