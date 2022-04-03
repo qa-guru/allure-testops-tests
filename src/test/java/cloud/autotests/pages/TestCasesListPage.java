@@ -14,7 +14,7 @@ public class TestCasesListPage {
     private final ElementsCollection rows = $$(".LoadableTree__view > li");
 
     @Step("Open test cases of project by id [{projectId}]")
-    public void openPage(Integer projectId) {
+    public void openPage(int projectId) {
         open("/project/" + projectId + "/test-cases");
     }
 

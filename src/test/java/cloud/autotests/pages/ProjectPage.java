@@ -22,7 +22,7 @@ public class ProjectPage {
 
 
     @Step("Open project by id `{projectId}`")
-    public void openPage(Integer projectId) {
+    public void openPage(int projectId) {
         open("/project/" + projectId);
     }
 
@@ -50,4 +50,5 @@ public class ProjectPage {
     public void checkTitle(String title) {
         $(".ProjectDashboards__title a").shouldHave(text(title));
     }
+
 }
