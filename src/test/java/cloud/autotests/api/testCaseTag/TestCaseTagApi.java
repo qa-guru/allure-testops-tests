@@ -1,6 +1,6 @@
 package cloud.autotests.api.testCaseTag;
 
-import cloud.autotests.api.BaseApi;
+import cloud.autotests.api.base.BaseApi;
 import cloud.autotests.api.EndPoints;
 import com.google.gson.Gson;
 import io.restassured.response.Response;

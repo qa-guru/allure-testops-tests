@@ -1,6 +1,6 @@
 package cloud.autotests.api.dashboard;
 
-import cloud.autotests.api.interfaces.RequestDto;
+import cloud.autotests.api.base.RequestDto;
 import com.google.gson.annotations.Expose;
 import lombok.Builder;
 import lombok.Getter;

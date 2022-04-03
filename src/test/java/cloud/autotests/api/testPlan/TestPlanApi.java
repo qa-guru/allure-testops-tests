@@ -1,6 +1,6 @@
 package cloud.autotests.api.testPlan;
 
-import cloud.autotests.api.BaseApi;
+import cloud.autotests.api.base.BaseApi;
 import cloud.autotests.api.EndPoints;
 
 import static io.restassured.RestAssured.given;

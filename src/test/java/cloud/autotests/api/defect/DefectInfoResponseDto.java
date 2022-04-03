@@ -1,6 +1,6 @@
 package cloud.autotests.api.defect;
 
-import cloud.autotests.api.interfaces.ResponseDto;
+import cloud.autotests.api.base.ResponseDto;
 import lombok.Getter;
 
 @Getter

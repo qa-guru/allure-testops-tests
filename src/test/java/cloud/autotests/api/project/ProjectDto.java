@@ -1,6 +1,6 @@
 package cloud.autotests.api.project;
 
-import cloud.autotests.api.BaseDto;
+import cloud.autotests.api.base.BaseDto;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
