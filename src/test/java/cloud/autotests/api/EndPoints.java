@@ -21,6 +21,10 @@ public class EndPoints {
     public static final String DASHBOARD_CREATE = "/api/rs/dashboard";
     public static final String DASHBOARD_DELETE = DASHBOARD_CREATE + "/{id}";
 
+    // Test plans
+    public static final String TEST_PLAN_CREATE = "/api/rs/testplan";
+    public static final String TEST_PLAN_DELETE = TEST_PLAN_CREATE + "/{id}";
+
     // Tags
     public static final String TEST_CASE_TAG = TEST_CASE + "/{testCaseId}/tag";
     public static final String TEST_TAG = "/api/rs/tag";
