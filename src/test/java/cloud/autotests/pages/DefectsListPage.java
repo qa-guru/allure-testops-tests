@@ -12,7 +12,7 @@ public class DefectsListPage {
     private final ElementsCollection defectsList = $$(".DefectsList__content > li");
 
     @Step("Open defects list page by projectId [{projectId}]")
-    public void openPage(Integer projectId) {
+    public void openPage(int projectId) {
         open("/project/" + projectId + "/defects");
     }
 
