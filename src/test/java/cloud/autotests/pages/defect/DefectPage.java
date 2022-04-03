@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.defect;
 
 import cloud.autotests.data.DefectStatus;
 import com.codeborne.selenide.SelenideElement;
@@ -13,17 +13,12 @@ import static com.codeborne.selenide.Selenide.*;
 public class DefectPage {
 
     private final SelenideElement self = $(".Pane");
-    private final SelenideElement defectActionMenu = self.find(".DefectMenu__menu button");
     private final SelenideElement defectActionItems = $(".tippy-content");
     private final SelenideElement descriptionPaneSection = self.find(byText("Description")).closest(".PaneSection");
 
     @Step("Open defect page by defectId [{defectID}] on projectId [{projectId}]")
     public void openPage(int projectId, int defectID) {
         open("/project/" + projectId + "/defects/" + defectID);
-        // Добавлена проверка на видимость кнопки [New defect], тк страница загружается частями
-        // Например, если страница прогружена не до конца, то нажатие на кнопку [Defect action] (бургер)
-        // не вызовет контекстное меню, а лишь отобразит подсказку (как если навести на этот элемент без клика)
-        $(".ProjectDefectsLayout__header button").shouldBe(visible);
     }
 
     @Step("Get (parse) defect id")
@@ -35,7 +30,7 @@ public class DefectPage {
 
     @Step("Edit defect name to [{newName}]")
     public void editDefectName(String newName) {
-        defectActionMenu.click();
+        clickDefectActionMenu();
         defectActionItems.find(byText(RENAME.getDisplayedName())).click();
         $(byName("name")).setValue(newName);
         $(byName("submit")).click();
@@ -50,14 +45,14 @@ public class DefectPage {
 
     @Step("Edit defect status to [{status}]")
     public void editDefectStatus(String status) {
-        defectActionMenu.click();
+        clickDefectActionMenu();
         defectActionItems.find(byText(status)).click();
         self.click();
     }
 
     @Step("Delete defect")
     public void deleteDefect() {
-        defectActionMenu.click();
+        clickDefectActionMenu();
         defectActionItems.find(byText(DELETE.getDisplayedName())).click();
         $(".DefectMenu__confirm-button").click();
     }
@@ -75,6 +70,10 @@ public class DefectPage {
     @Step("Verify defect status is [{status}]")
     public void checkThatDefectStatusIs(DefectStatus status) {
         self.find(".DefectStatusChange").shouldHave(text(status.getStatus()));
+    }
+
+    private void clickDefectActionMenu() {
+        self.find(".DefectMenu__menu button").shouldNotHave(attribute("disabled")).click();
     }
 
 }

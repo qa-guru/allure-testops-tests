@@ -1,16 +1,21 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.defect;
 
 import cloud.autotests.api.defect.CreateDefectRequestDto;
 import cloud.autotests.api.defect.DefectApi;
 import cloud.autotests.data.DefectStatus;
 import cloud.autotests.helpers.WithLogin;
-import org.junit.jupiter.api.AfterEach;
+import cloud.autotests.pages.defect.DefectPage;
+import cloud.autotests.pages.defect.DefectsListPage;
+import cloud.autotests.tests.TestBase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static cloud.autotests.data.DefectActionMenuItem.*;
 
-public class DefectTests extends TestBase {
+public class DefectCrudTests extends TestBase {
+
+    private final DefectsListPage defectsListPage = new DefectsListPage();
+    private final DefectPage defectPage = new DefectPage();
 
     // Test project [dont-remove-autotests-for-defects]
     private final static int PROJECT_ID = 1157;
@@ -19,15 +24,6 @@ public class DefectTests extends TestBase {
             .description(faker.random().hex(20))
             .projectId(PROJECT_ID)
             .build();
-    private Integer createdDefectId;
-
-    @AfterEach
-    void deleteCreatedDefect() {
-        // Cleaning data
-        // createdDefectId != null, значит в рамках теста создан новый дефект, который необходимо подчистить
-        if (createdDefectId != null)
-            DefectApi.deleteDefect(createdDefectId);
-    }
 
     @Test
     @WithLogin
@@ -38,13 +34,16 @@ public class DefectTests extends TestBase {
 
         // Act
         defectsListPage.createNewDefect(defect.getName(), defect.getDescription());
-        createdDefectId = defectPage.getDefectId();
+        int createdDefectId = defectPage.getDefectId();
 
         // Assert
         defectsListPage.checkThatDefectsListContainsDefect(defect.getName());
         defectPage.checkThatDefectNameIs(defect.getName());
         defectPage.checkThatDefectDescriptionIs(defect.getDescription());
         defectPage.checkThatDefectStatusIs(DefectStatus.OPEN);
+
+        // Cleaning data
+        DefectApi.deleteDefect(createdDefectId);
     }
 
     @Test
@@ -56,7 +55,7 @@ public class DefectTests extends TestBase {
         String newDescription = faker.random().hex(20);
 
         // Arrange
-        createdDefectId = DefectApi.createDefect(defect).getDefectId();
+        int createdDefectId = DefectApi.createDefect(defect).getId();
         defectPage.openPage(PROJECT_ID, createdDefectId);
 
         // Act
@@ -68,6 +67,9 @@ public class DefectTests extends TestBase {
         defectPage.checkThatDefectNameIs(newName);
         defectPage.checkThatDefectDescriptionIs(newDescription);
         defectPage.checkThatDefectStatusIs(DefectStatus.CLOSED);
+
+        // Cleaning data
+        DefectApi.deleteDefect(createdDefectId);
     }
 
     @Test
@@ -75,7 +77,7 @@ public class DefectTests extends TestBase {
     @DisplayName("Delete defect")
     void deleteDefect() {
         // Arrange
-        createdDefectId = DefectApi.createDefect(defect).getDefectId();
+        int createdDefectId = DefectApi.createDefect(defect).getId();
         defectPage.openPage(PROJECT_ID, createdDefectId);
 
         // Act
@@ -83,10 +85,6 @@ public class DefectTests extends TestBase {
 
         // Assert
         defectsListPage.checkThatDefectsListDoNotContainsDefect(defect.getName());
-
-        // Присваиваю createdDefectId = null,
-        // тк удалять дефект через API (в @AfterEach) не нужно (потому что мы его удалили через UI)
-        createdDefectId = null;
     }
 
 }

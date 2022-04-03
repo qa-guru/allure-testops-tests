@@ -7,7 +7,6 @@ import cloud.autotests.helpers.DriverSettings;
 import cloud.autotests.helpers.DriverUtils;
 import cloud.autotests.helpers.ExtendedSelenideListener;
 import cloud.autotests.pages.*;
-import cloud.autotests.pages.DefectsListPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
@@ -27,9 +26,6 @@ public class TestBase {
     protected final LoginPage loginPage = new LoginPage();
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
-
-    protected final DefectsListPage defectsListPage = new DefectsListPage();
-    protected final DefectPage defectPage = new DefectPage();
 
     protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
     protected final TestCasePage testCasePage = new TestCasePage();

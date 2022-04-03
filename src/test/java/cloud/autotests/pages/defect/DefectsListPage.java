@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.defect;
 
 import com.codeborne.selenide.*;
 import io.qameta.allure.Step;
