@@ -6,7 +6,7 @@ import cloud.autotests.helpers.WithLogin;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TestPlanTests extends TestBase {
+public class TestPlanTests extends BaseTest {
 
     // Test project [dont-remove-autotests-test-plans]
     private final static int PROJECT_ID = 1178;

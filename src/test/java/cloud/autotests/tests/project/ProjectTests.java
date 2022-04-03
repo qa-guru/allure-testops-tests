@@ -1,7 +1,7 @@
 package cloud.autotests.tests.project;
 
 import cloud.autotests.helpers.WithLogin;
-import cloud.autotests.tests.TestBase;
+import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.stream.Stream;
 
 @Story("Project tests")
-public class ProjectTests extends TestBase {
+public class ProjectTests extends BaseTest {
 
     static Stream<Arguments> findExistProjectProvider(){
         return Stream.of(

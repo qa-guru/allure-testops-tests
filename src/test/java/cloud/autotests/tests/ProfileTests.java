@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
 
 @Story("Profile tests")
-public class ProfileTests extends TestBase {
+public class ProfileTests extends BaseTest {
 
     @WithLogin
     @Test

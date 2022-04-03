@@ -4,13 +4,13 @@ import cloud.autotests.api.project.CreateProjectRequestDto;
 import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.data.MenuItem;
 import cloud.autotests.helpers.WithLogin;
-import cloud.autotests.tests.TestBase;
+import cloud.autotests.tests.BaseTest;
 import com.github.javafaker.Faker;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
 @Story("Project tests")
-public class DeleteProjectTests extends TestBase {
+public class DeleteProjectTests extends BaseTest {
 
     private final CreateProjectRequestDto project = CreateProjectRequestDto.builder()
             .name("testuser-testproject-" + new Faker().random().hex(6))

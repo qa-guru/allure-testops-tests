@@ -7,7 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Story("Test case tags tests")
-public class TestCaseTagsTests extends TestBase {
+public class TestCaseTagsTests extends BaseTest {
 
 	// Project name [GOST_group_tests]
 	private static final int PROJECT_ID = 291;

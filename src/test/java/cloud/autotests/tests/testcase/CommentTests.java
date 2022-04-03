@@ -1,13 +1,13 @@
 package cloud.autotests.tests.testcase;
 
 import cloud.autotests.helpers.WithLogin;
-import cloud.autotests.tests.TestBase;
+import cloud.autotests.tests.BaseTest;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("crud")
-public class CommentTests extends TestBase {
+public class CommentTests extends BaseTest {
 
     private static final String PROJECT_NAME = "teacher qa_guru_diplom_project";
 

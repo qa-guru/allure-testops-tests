@@ -19,9 +19,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-
 @ExtendWith({AllureJunit5.class})
-public class TestBase {
+public class BaseTest {
 
     protected final Faker faker = new Faker();
 
@@ -29,7 +28,6 @@ public class TestBase {
     protected final ProjectPage projectPage = new ProjectPage();
 
     protected final LoginPage loginPage = new LoginPage();
-
 
     protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
     protected final TestCasePage testCasePage = new TestCasePage();
@@ -63,4 +61,5 @@ public class TestBase {
             AllureAttachments.addVideo(sessionId);
         }
     }
+
 }

@@ -9,7 +9,7 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
 @Story("Properties of Tests")
-public class TestPropertiesTest extends TestBase{
+public class TestPropertiesTest extends BaseTest {
 
     // Test project [teacher qa_guru_diplom_project]
     private static final int PROJECT_ID = 43;

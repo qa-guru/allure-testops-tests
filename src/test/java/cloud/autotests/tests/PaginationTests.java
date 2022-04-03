@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
 
 @Story("Pagination tests")
-public class PaginationTests extends TestBase {
+public class PaginationTests extends BaseTest {
 
     @CsvSource(value = {
             "0,5",

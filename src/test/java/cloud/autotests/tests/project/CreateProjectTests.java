@@ -3,12 +3,12 @@ package cloud.autotests.tests.project;
 import cloud.autotests.api.project.CreateProjectRequestDto;
 import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.helpers.WithLogin;
-import cloud.autotests.tests.TestBase;
+import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
 @Story("Project tests")
-public class CreateProjectTests extends TestBase {
+public class CreateProjectTests extends BaseTest {
 
     private final CreateProjectRequestDto project = CreateProjectRequestDto.builder()
             .name("testuser-testproject-" + faker.random().hex(6))

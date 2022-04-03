@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.IOException;
 
-public class ExportTestCaseTests extends TestBase {
+public class ExportTestCaseTests extends BaseTest {
 
     private final static int PROJECT_ID = 1159;
 

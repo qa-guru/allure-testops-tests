@@ -12,7 +12,7 @@ import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 
 @Story("Login tests")
-public class LoginTests extends TestBase {
+public class LoginTests extends BaseTest {
 
     @Test
     @DisplayName("Successful login to account")
