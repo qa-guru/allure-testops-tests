@@ -1,28 +1,19 @@
 package cloud.autotests.tests.project;
 
+import cloud.autotests.api.project.CreateProjectRequestDto;
 import cloud.autotests.api.project.ProjectApi;
-import cloud.autotests.api.project.ProjectDto;
-import cloud.autotests.api.project.ProjectDtoBuilder;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.TestBase;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 
 @Story("Project tests")
-@Feature("Create project")
 public class CreateProjectTests extends TestBase {
 
-    private final String projectName = "testuser-testproject-" + faker.random().hex(6);
-    private Integer projectId;
-
-    @AfterEach
-    void removeProject() {
-        // Cleaning data
-        // projectId != null, значит в рамках теста был создан новый проект, который нужно подчистить
-        if (projectId != null)
-            ProjectApi.removeProject(projectId);
-    }
+    private final CreateProjectRequestDto project = CreateProjectRequestDto.builder()
+            .name("testuser-testproject-" + faker.random().hex(6))
+            .isPublic(true)
+            .build();
 
     @Test
     @WithLogin
@@ -32,11 +23,14 @@ public class CreateProjectTests extends TestBase {
         projectsListPage.openPage();
 
         // Act
-        projectsListPage.createNewProject(projectName);
-        projectId = ProjectApi.getProjectId(projectName);
+        projectsListPage.createNewProject(project.getName());
+        int projectId = ProjectApi.getProjectsByName(project.getName())[0].getId();
 
         // Assert
-        projectPage.checkTitle(projectName);
+        projectPage.checkTitle(project.getName());
+
+        // Cleaning data
+        ProjectApi.deleteProject(projectId);
     }
 
     @Test
@@ -58,18 +52,15 @@ public class CreateProjectTests extends TestBase {
     @WithLogin
     @DisplayName("Create new project by API")
     void createProjectByApi() {
-        // Test data
-        ProjectDto requestBody = ProjectDtoBuilder.builder()
-                .setProjectName(projectName)
-                .setIsPublic(true)
-                .build();
-
         // Act
-        projectId = ProjectApi.createProjectAndGetId(requestBody);
+        int projectId = ProjectApi.createProject(this.project).getId();
         projectPage.openPage(projectId);
 
         // Assert
-        projectPage.checkTitle(requestBody.getProjectName());
+        projectPage.checkTitle(project.getName());
+
+        // Cleaning data
+        ProjectApi.deleteProject(projectId);
     }
 
 }
