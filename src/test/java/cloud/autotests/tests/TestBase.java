@@ -34,7 +34,6 @@ public class TestBase {
     protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
     protected final TestCasePage testCasePage = new TestCasePage();
 
-    protected final DashboardPage dashboardPage = new DashboardPage();
 
     protected final TestPlansListPage testPlansListPage = new TestPlansListPage();
     protected final TestPlanPage testPlanPage = new TestPlanPage();

@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.dashboard;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;

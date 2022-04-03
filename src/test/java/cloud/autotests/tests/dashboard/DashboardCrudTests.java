@@ -1,13 +1,17 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.dashboard;
 
 import cloud.autotests.api.dashboard.CreateDashboardRequestDto;
 import cloud.autotests.api.dashboard.DashboardApi;
 import cloud.autotests.helpers.WithLogin;
-import org.junit.jupiter.api.AfterEach;
+import cloud.autotests.pages.dashboard.DashboardPage;
+import cloud.autotests.tests.TestBase;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class DashboardTests extends TestBase {
+public class DashboardCrudTests extends TestBase {
+
+    private final DashboardPage dashboardPage = new DashboardPage();
 
     // Test project [dont-remove-autotests-for-dashboard]
     private final static int PROJECT_ID = 1175;
@@ -15,15 +19,6 @@ public class DashboardTests extends TestBase {
             .name(faker.random().hex(15))
             .projectId(PROJECT_ID)
             .build();
-    private Integer createdDashboardId;
-
-    @AfterEach
-    void deleteCreatedDashboard() {
-        // Cleaning data
-        // createdDashboardId != null, значит в рамках теста создан новый dashboard, который необходимо подчистить
-        if (createdDashboardId != null)
-            DashboardApi.deleteDashboard(createdDashboardId);
-    }
 
     @Test
     @WithLogin
@@ -39,16 +34,23 @@ public class DashboardTests extends TestBase {
         dashboardPage.checkThatDashboardsListContainsDashboard(dashboard.getName());
         dashboardPage.checkThatNewDashboardHasAddWidgetButton();
 
-        // For cleaning data in @AfterEach
-        createdDashboardId = dashboardPage.getDashboardId();
+        // Cleaning data
+        int createdDashboardId = dashboardPage.getDashboardId();
+        DashboardApi.deleteDashboard(createdDashboardId);
     }
+
+    @Test
+    @WithLogin
+    @DisplayName("Edit dashboard")
+    @Disabled
+    void editDashboard() {}
 
     @Test
     @WithLogin
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
         // Arrange
-        createdDashboardId = DashboardApi.createDashboard(dashboard).getId();
+        int createdDashboardId = DashboardApi.createDashboard(dashboard).getId();
         dashboardPage.openPageDashboard(PROJECT_ID, createdDashboardId);
         dashboardPage.checkThatDashboardsListContainsDashboard(dashboard.getName());
         dashboardPage.checkThatNewDashboardHasAddWidgetButton();
@@ -58,10 +60,6 @@ public class DashboardTests extends TestBase {
 
         // Assert
         dashboardPage.checkThatDashboardsListDoNotContainsDashboard(dashboard.getName());
-
-        // Присваиваю createdDashboardId = null,
-        // тк удалять dashboard через API (в @AfterEach) не нужно (потому что мы его удалили через UI)
-        createdDashboardId = null;
     }
 
 }
