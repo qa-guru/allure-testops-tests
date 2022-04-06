@@ -1,7 +1,8 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.theme;
 
 import cloud.autotests.config.App;
 import cloud.autotests.helpers.LocalStorageHelper;
+import cloud.autotests.tests.BaseTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
