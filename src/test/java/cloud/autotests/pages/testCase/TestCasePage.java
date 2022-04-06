@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.testCase;
 
 import cloud.autotests.data.TestCaseStatus;
 import cloud.autotests.data.TestCaseWorkflow;
@@ -17,16 +17,11 @@ public class TestCasePage {
     private final SelenideElement self = $(".Pane");
     private final SelenideElement tagsSection = self.find(byText("Tags")).closest(".PaneSection");
     private final SelenideElement descriptionPaneSection = self.find(byText("Description")).closest(".PaneSection");
-    private final SelenideElement testCaseActionMenu = self.find(".Menu__trigger");
     private final SelenideElement testCaseActionItems = $(".tippy-content");
 
     @Step("Open test case by id [{testCaseId}] on project by id [{projectId}]")
     public void openPage(int projectId, int testCaseId) {
         open("/project/" + projectId + "/test-cases/" + testCaseId);
-        // Добавлена проверка на видимость надписи [Write] в секции [Comments], тк страница загружается частями
-        // Например, если страница прогружена не до конца, то нажатие на кнопку [Test case action] (бургер)
-        // не вызовет контекстное меню, а лишь отобразит подсказку (как если навести на этот элемент без клика)
-        $(".CommentEdit").find(byText("Write")).shouldBe(visible);
     }
 
     @Step("Get (parse) test case id")
@@ -38,7 +33,7 @@ public class TestCasePage {
 
     @Step("Edit test case name to [{newName}]")
     public void editTestCaseName(String newName) {
-        testCaseActionMenu.click();
+        clickTestCaseActionMenu();
         testCaseActionItems.find(byText("Rename")).click();
         $(byName("name")).setValue(newName);
         $(".Modal").find(byName("submit")).click();
@@ -53,7 +48,7 @@ public class TestCasePage {
 
     @Step("Change test case status to [{newStatus}]")
     public void changeTestCaseStatus(TestCaseWorkflow workflow, TestCaseStatus newStatus) {
-        testCaseActionMenu.click();
+        clickTestCaseActionMenu();
         testCaseActionItems.find(byText("Change status")).click();
         getFormLabelFromChangeStatusPopup("Workflow").click();
         $(byText(workflow.getWorkflow())).click();
@@ -64,7 +59,7 @@ public class TestCasePage {
 
     @Step("Delete test case")
     public void deleteTestCase() {
-        testCaseActionMenu.click();
+        clickTestCaseActionMenu();
         testCaseActionItems.find(byText("Delete")).click();
         $(".TestCaseDeleteModal__confirm-button").click();
     }
@@ -106,6 +101,10 @@ public class TestCasePage {
 
     private SelenideElement getFormLabelFromChangeStatusPopup(String fieldTitle) {
         return $$(".FormLabel__name").find(text(fieldTitle)).closest(".FormLabel").find(".Select");
+    }
+
+    private void clickTestCaseActionMenu() {
+        self.find(".Menu__trigger").shouldNotHave(attribute("disabled")).click();
     }
 
 }

@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.testPlan;
 
 import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;

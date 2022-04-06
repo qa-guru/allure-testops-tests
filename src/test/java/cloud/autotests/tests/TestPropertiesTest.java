@@ -3,8 +3,8 @@ package cloud.autotests.tests;
 import cloud.autotests.data.MenuItem;
 import cloud.autotests.data.PropertyName;
 import cloud.autotests.helpers.WithLogin;
-import cloud.autotests.pages.*;
-import cloud.autotests.pages.testCase.TestProperties;
+import cloud.autotests.pages.testCase.TestCaseProperties;
+import cloud.autotests.pages.testCase.TestCasesListPage;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +24,7 @@ public class TestPropertiesTest extends BaseTest {
         TestCasesListPage testCasesTable = new TestCasesListPage();
         testCasesTable.navigateToTestByStatus(STATUS_NAME);
 
-        TestProperties testProperties = new TestProperties();
+        TestCaseProperties testProperties = new TestCaseProperties();
         testProperties.shouldHaveSize(8);
 
         testProperties.shouldHaveElement(PropertyName.TAGS.getDisplayedName());

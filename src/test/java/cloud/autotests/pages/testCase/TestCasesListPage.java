@@ -1,4 +1,4 @@
-package cloud.autotests.pages;
+package cloud.autotests.pages.testCase;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;

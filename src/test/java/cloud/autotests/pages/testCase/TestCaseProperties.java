@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class TestProperties {
+public class TestCaseProperties {
 
     private ElementsCollection rows = $$(".TestCaseOverview__secondary > div");
     private ElementsCollection items = $$(".PaneSection__name");
