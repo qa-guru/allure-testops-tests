@@ -1,6 +1,7 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.project;
 
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
