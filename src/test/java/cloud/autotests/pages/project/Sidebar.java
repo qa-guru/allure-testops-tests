@@ -1,4 +1,4 @@
-package cloud.autotests.pages.components;
+package cloud.autotests.pages.project;
 
 import cloud.autotests.data.MenuItem;
 import com.codeborne.selenide.ElementsCollection;

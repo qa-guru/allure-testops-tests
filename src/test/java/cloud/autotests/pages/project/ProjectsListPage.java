@@ -1,6 +1,5 @@
 package cloud.autotests.pages.project;
 
-import cloud.autotests.pages.components.CreateProjectPopup;
 import com.codeborne.selenide.ElementsCollection;
 import io.qameta.allure.Step;
 

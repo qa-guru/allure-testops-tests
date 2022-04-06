@@ -1,4 +1,4 @@
-package cloud.autotests.pages.components;
+package cloud.autotests.pages.project;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;

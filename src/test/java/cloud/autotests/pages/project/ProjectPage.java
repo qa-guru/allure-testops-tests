@@ -1,6 +1,5 @@
 package cloud.autotests.pages.project;
 
-import cloud.autotests.pages.components.Sidebar;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.CollectionCondition.*;
