@@ -1,6 +1,6 @@
 package cloud.autotests.api.testCase;
 
-import cloud.autotests.api.BaseApi;
+import cloud.autotests.api.base.BaseApi;
 import cloud.autotests.api.EndPoints;
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.is;

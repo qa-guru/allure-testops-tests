@@ -2,12 +2,10 @@ package cloud.autotests.api;
 
 public class EndPoints {
 
-    // ToDo переименовать endpoins под конкретный запрос, то есть, например, DEFECT_CREATE
-        // использоваться будет в одном лишь месте
-
     // Projects
-    public static final String PROJECT = "/api/rs/project";
-    public static final String PROJECT_BY_ID = PROJECT + "/{id}";
+    public static final String PROJECT_CREATE = "/api/rs/project";
+    public static final String PROJECT_FIND_BY_NAME = "/api/rs/project";
+    public static final String PROJECT_BY_ID = PROJECT_CREATE + "/{id}";
 
     // Test cases
     public static final String TEST_CASE = "/api/rs/testcase";
@@ -26,8 +24,9 @@ public class EndPoints {
     public static final String TEST_PLAN_DELETE = TEST_PLAN_CREATE + "/{id}";
 
     // Tags
-    public static final String TEST_CASE_TAG = TEST_CASE + "/{testCaseId}/tag";
-    public static final String TEST_TAG = "/api/rs/tag";
-    public static final String TEST_TAG_BY_ID = TEST_TAG + "/{id}";
+    public static final String TEST_CASE_TAG_CREATE = "/api/rs/tag";
+    public static final String TEST_CASE_TAG_DELETE = TEST_CASE_TAG_CREATE + "/{id}";
+    public static final String TEST_CASE_TAG_GET = "/api/rs/testcase/{testCaseId}/tag";
+    public static final String TEST_CASE_TAG_SET_TAGS = "/api/rs/testcase/{testCaseId}/tag";
 
 }

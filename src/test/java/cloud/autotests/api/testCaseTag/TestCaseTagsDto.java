@@ -1,31 +1,30 @@
 package cloud.autotests.api.testCaseTag;
 
-import cloud.autotests.api.BaseDto;
+import cloud.autotests.api.base.RequestDto;
 import com.google.gson.annotations.Expose;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestCaseTagsDto extends BaseDto {
+
+public class TestCaseTagsDto implements RequestDto {
 
     public static TestCaseTagsDto fromJson(String json) {
-        return GSON.fromJson(json, TestCaseTagsDto.class);
+        return gson.fromJson(json, TestCaseTagsDto.class);
     }
 
     @Expose
+    @Getter
     private final List<TestCaseTagDto> tags = new ArrayList<>();
-
-    public List<TestCaseTagDto> getTags() {
-        return tags;
-    }
 
     void addTag(TestCaseTagDto tag) {
         tags.add(tag);
     }
 
-    @Override
     public String toJson() {
-        return GSON.toJson(tags.toArray());
+        return gson.toJson(tags.toArray());
     }
 
 }
+

@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.refresh;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ThemeTests extends TestBase {
+public class ThemeTests extends BaseTest {
 
 
     @CsvSource(value = {

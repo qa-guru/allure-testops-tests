@@ -1,6 +1,6 @@
 package cloud.autotests.api.testCaseTag;
 
-import cloud.autotests.api.BaseApi;
+import cloud.autotests.api.base.BaseApi;
 import cloud.autotests.api.EndPoints;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
@@ -16,10 +16,10 @@ public class TestCaseTagApi extends BaseApi {
         TestCaseTagDto[] tags = new Gson().fromJson(json, TestCaseTagDto[].class);
 
         Optional<TestCaseTagDto> optionalTag = Arrays.stream(tags)
-                .filter(tag -> tag.getTagName().equals(tagName))
+                .filter(tag -> tag.getName().equals(tagName))
                 .findFirst();
         if (optionalTag.isPresent())
-            return optionalTag.get().getTagId();
+            return optionalTag.get().getId();
 
         throw new RuntimeException("Don't found tag with name " + tagName);
     }
@@ -28,20 +28,20 @@ public class TestCaseTagApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", tagId)
                 .when()
-                    .delete(EndPoints.TEST_TAG_BY_ID)
+                    .delete(EndPoints.TEST_CASE_TAG_DELETE)
                 .then()
                     .statusCode(204);
     }
 
     public static TestCaseTagDto createNewTestCaseTag(String newTagName) {
-        TestCaseTagDto tag = TestCaseTagDtoBuilder.builder()
-                .setTagName(newTagName)
+        TestCaseTagDto tag = TestCaseTagDto.builder()
+                .name(newTagName)
                 .build();
 
         String json = given().spec(defaultRequestSpec)
                     .body(tag.toJson())
                 .when()
-                    .post(EndPoints.TEST_TAG)
+                    .post(EndPoints.TEST_CASE_TAG_CREATE)
                 .then()
                     .statusCode(200)
                     .extract().asString();
@@ -58,7 +58,7 @@ public class TestCaseTagApi extends BaseApi {
                     .pathParam("testCaseId", testCaseId)
                     .body(builder.build().toJson())
                 .when()
-                    .post(EndPoints.TEST_CASE_TAG)
+                    .post(EndPoints.TEST_CASE_TAG_SET_TAGS)
                 .then()
                     .statusCode(200)
                     .extract()
@@ -69,7 +69,7 @@ public class TestCaseTagApi extends BaseApi {
         return given().spec(defaultRequestSpec)
                 .pathParam("testCaseId", testCaseId)
                 .when()
-                .get(EndPoints.TEST_CASE_TAG)
+                .get(EndPoints.TEST_CASE_TAG_GET)
                 .then()
                 .statusCode(200)
                 .extract()

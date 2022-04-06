@@ -1,6 +1,6 @@
 package cloud.autotests.helpers;
 
-import cloud.autotests.api.AuthorizationApi;
+import cloud.autotests.api.authorization.AuthorizationApi;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.Cookie;
@@ -13,7 +13,7 @@ public class LoginExtension implements BeforeEachCallback {
     @Override
     public void beforeEach(ExtensionContext context) {
         String allureCookieName = "ALLURE_TESTOPS_SESSION";
-        String cookies = AuthorizationApi.getAuthorizationForUIResponse().getCookie(allureCookieName);
+        String cookies = AuthorizationApi.getAuthorizationCookie();
 
         open("/favicon.ico");
         getWebDriver().manage().addCookie(new Cookie(allureCookieName, cookies));

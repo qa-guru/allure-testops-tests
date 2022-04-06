@@ -1,6 +1,6 @@
 package cloud.autotests.api.testPlan;
 
-import cloud.autotests.api.interfaces.ResponseDto;
+import cloud.autotests.api.base.ResponseDto;
 import com.google.gson.annotations.SerializedName;
 import lombok.Getter;
 

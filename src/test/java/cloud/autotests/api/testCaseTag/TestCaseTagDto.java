@@ -1,38 +1,26 @@
 package cloud.autotests.api.testCaseTag;
 
-import cloud.autotests.api.BaseDto;
+import cloud.autotests.api.base.RequestDto;
 import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import lombok.Builder;
+import lombok.Getter;
 
-public class TestCaseTagDto extends BaseDto {
+@Builder @Getter
+public class TestCaseTagDto implements RequestDto {
 
     public static TestCaseTagDto fromJson(String json) {
-        return GSON.fromJson(json, TestCaseTagDto.class);
+        return gson.fromJson(json, TestCaseTagDto.class);
     }
 
     @Expose
-    @SerializedName("id")
-    private Integer tagId;
-    public int getTagId() {
-        return tagId;
-    }
-    void setTagId(int tagId) {
-        this.tagId = tagId;
-    }
+    private Integer id;
 
     @Expose
-    @SerializedName("name")
-    private String tagName;
-    public String getTagName() {
-        return tagName;
-    }
-    void setTagName(String tagName) {
-        this.tagName = tagName;
-    }
+    private String name;
 
     @Override
     public String toJson() {
-        return GSON.toJson(this);
+        return gson.toJson(this);
     }
 
 }
