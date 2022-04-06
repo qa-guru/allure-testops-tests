@@ -28,7 +28,7 @@ public class TestCaseTagApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", tagId)
                 .when()
-                    .delete(EndPoints.TEST_TAG_BY_ID)
+                    .delete(EndPoints.TEST_CASE_TAG_DELETE)
                 .then()
                     .statusCode(204);
     }
@@ -41,7 +41,7 @@ public class TestCaseTagApi extends BaseApi {
         String json = given().spec(defaultRequestSpec)
                     .body(tag.toJson())
                 .when()
-                    .post(EndPoints.TEST_TAG)
+                    .post(EndPoints.TEST_CASE_TAG_CREATE)
                 .then()
                     .statusCode(200)
                     .extract().asString();
@@ -58,7 +58,7 @@ public class TestCaseTagApi extends BaseApi {
                     .pathParam("testCaseId", testCaseId)
                     .body(builder.build().toJson())
                 .when()
-                    .post(EndPoints.TEST_CASE_TAG)
+                    .post(EndPoints.TEST_CASE_TAG_SET_TAGS)
                 .then()
                     .statusCode(200)
                     .extract()
@@ -69,7 +69,7 @@ public class TestCaseTagApi extends BaseApi {
         return given().spec(defaultRequestSpec)
                 .pathParam("testCaseId", testCaseId)
                 .when()
-                .get(EndPoints.TEST_CASE_TAG)
+                .get(EndPoints.TEST_CASE_TAG_GET)
                 .then()
                 .statusCode(200)
                 .extract()
