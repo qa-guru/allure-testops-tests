@@ -1,7 +1,9 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.profile;
 
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -10,14 +12,12 @@ import static com.codeborne.selenide.Selenide.*;
 @Story("Profile tests")
 public class ProfileTests extends BaseTest {
 
-    @WithLogin
     @Test
+    @WithLogin
+    @DisplayName("User profile page contains valid data")
     void profilePageShouldContainValidDataTest() {
         open("");
-        $(".Avatar").click();
-        $$(".UserMenu__menu .Menu__item")
-                .find(text("Your profile"))
-                .click();
+        projectPage.getSidebar().navigateToUserProfile();
         $$(".PaneSection").find(text("Username")).should(text("testuser"));
         $$(".PaneSection").find(text("Full name")).should(text("Test User"));
         $$(".PaneSection").find(text("Email")).should(text("no@no.no"));
@@ -28,6 +28,5 @@ public class ProfileTests extends BaseTest {
                 " of filters pane on project test cases page. List Mode used to display saved filters at first, when" +
                 " View Mode is used to force display of filter controls."));
     }
-
 
 }
