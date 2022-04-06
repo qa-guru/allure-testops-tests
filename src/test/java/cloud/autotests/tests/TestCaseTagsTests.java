@@ -49,14 +49,14 @@ public class TestCaseTagsTests extends BaseTest {
 		TestCaseTagDto tag = TestCaseTagApi.createNewTestCaseTag(randomTagName);
 		TestCaseTagApi.setTestCaseTags(testCaseId, tag);
 		testCasePage.openPage(PROJECT_ID, testCaseId);
-		testCasePage.checkThatTagsSectionContainsTag(tag.getTagName());
+		testCasePage.checkThatTagsSectionContainsTag(tag.getName());
 
 		// Act
 		testCasePage.testCasesTable.selectTestCase(testCaseId);
-		testCasePage.testCasesTable.removeTagViaBulkAction(tag.getTagName());
+		testCasePage.testCasesTable.removeTagViaBulkAction(tag.getName());
 
 		// Assert
-		testCasePage.checkThatTagsSectionDoNotContainsTag(tag.getTagName());
+		testCasePage.checkThatTagsSectionDoNotContainsTag(tag.getName());
 	}
 
 }

@@ -16,10 +16,10 @@ public class TestCaseTagApi extends BaseApi {
         TestCaseTagDto[] tags = new Gson().fromJson(json, TestCaseTagDto[].class);
 
         Optional<TestCaseTagDto> optionalTag = Arrays.stream(tags)
-                .filter(tag -> tag.getTagName().equals(tagName))
+                .filter(tag -> tag.getName().equals(tagName))
                 .findFirst();
         if (optionalTag.isPresent())
-            return optionalTag.get().getTagId();
+            return optionalTag.get().getId();
 
         throw new RuntimeException("Don't found tag with name " + tagName);
     }
@@ -34,8 +34,8 @@ public class TestCaseTagApi extends BaseApi {
     }
 
     public static TestCaseTagDto createNewTestCaseTag(String newTagName) {
-        TestCaseTagDto tag = TestCaseTagDtoBuilder.builder()
-                .setTagName(newTagName)
+        TestCaseTagDto tag = TestCaseTagDto.builder()
+                .name(newTagName)
                 .build();
 
         String json = given().spec(defaultRequestSpec)
