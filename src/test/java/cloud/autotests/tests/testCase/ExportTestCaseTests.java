@@ -1,7 +1,8 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.testCase;
 
 import cloud.autotests.helpers.CsvHelper;
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.tests.BaseTest;
 import com.opencsv.exceptions.CsvException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

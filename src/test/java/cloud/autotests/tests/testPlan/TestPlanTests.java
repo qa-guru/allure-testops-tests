@@ -1,12 +1,18 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.testPlan;
 
 import cloud.autotests.api.testPlan.CreateTestPlanRequestDto;
 import cloud.autotests.api.testPlan.TestPlanApi;
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.pages.testPlan.TestPlanPage;
+import cloud.autotests.pages.testPlan.TestPlansListPage;
+import cloud.autotests.tests.BaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TestPlanTests extends BaseTest {
+
+    private final TestPlansListPage testPlansListPage = new TestPlansListPage();
+    private final TestPlanPage testPlanPage = new TestPlanPage();
 
     // Test project [dont-remove-autotests-test-plans]
     private final static int PROJECT_ID = 1178;

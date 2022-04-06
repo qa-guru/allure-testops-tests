@@ -1,10 +1,10 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.testCase;
 
 import cloud.autotests.api.testCase.CreateTestCaseRequestDto;
 import cloud.autotests.api.testCase.TestCaseApi;
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -21,15 +21,6 @@ public class TestCaseTests extends BaseTest {
             .description(faker.random().hex(20))
             .projectId(PROJECT_ID)
             .build();
-    private Integer createdTestCaseId;
-
-    @AfterEach
-    void deleteCreatedTestCase() {
-        // Cleaning data
-        // createdTestCaseId != null, значит в рамках теста создан новый тест-кейс, который необходимо подчистить
-        if (createdTestCaseId != null)
-            TestCaseApi.deleteTestCase(createdTestCaseId);
-    }
 
     @Test
     @WithLogin
@@ -42,13 +33,16 @@ public class TestCaseTests extends BaseTest {
         testCasesListPage.unlockTestCasesTree();
         testCasesListPage.createNewTestCase(testCase.getName());
         testCasesListPage.loadTestCase(testCase.getName());
-        createdTestCaseId = testCasePage.getTestCaseId();
+        int createdTestCaseId = testCasePage.getTestCaseId();
 
         // Assert
         testCasesListPage.checkThatTestCasesTableContainsTestCase(testCase.getName());
         testCasePage.checkThatTestCaseNameIs(testCase.getName());
         testCasePage.checkThatTestCaseDescriptionIs("No description");
         testCasePage.checkThatTestCaseStatusIs(DRAFT);
+
+        // Cleaning data
+        TestCaseApi.deleteTestCase(createdTestCaseId);
     }
 
     @Test
@@ -60,7 +54,7 @@ public class TestCaseTests extends BaseTest {
         String newDescription = faker.random().hex(20);
 
         // Arrange
-        createdTestCaseId = TestCaseApi.createTestCase(testCase).getId();
+        int createdTestCaseId = TestCaseApi.createTestCase(testCase).getId();
         testCasePage.openPage(PROJECT_ID, createdTestCaseId);
         testCasesListPage.checkThatTestCasesTableContainsTestCase(testCase.getName());
 
@@ -73,6 +67,9 @@ public class TestCaseTests extends BaseTest {
         testCasePage.checkThatTestCaseNameIs(newName);
         testCasePage.checkThatTestCaseDescriptionIs(newDescription);
         testCasePage.checkThatTestCaseStatusIs(ACTIVE);
+
+        // Cleaning data
+        TestCaseApi.deleteTestCase(createdTestCaseId);
     }
 
     @Test
@@ -80,7 +77,7 @@ public class TestCaseTests extends BaseTest {
     @DisplayName("Delete test case")
     void deleteTestCase() {
         // Arrange
-        createdTestCaseId = TestCaseApi.createTestCase(testCase).getId();
+        int createdTestCaseId = TestCaseApi.createTestCase(testCase).getId();
         testCasePage.openPage(PROJECT_ID, createdTestCaseId);
         testCasesListPage.checkThatTestCasesTableContainsTestCase(testCase.getName());
 
@@ -89,10 +86,6 @@ public class TestCaseTests extends BaseTest {
 
         // Assert
         testCasesListPage.checkThatTestCasesTableDoNotContainsTestCase(testCase.getName());
-
-        // Присваиваю createdTestCaseId = null,
-        // тк удалять тест-кейс через API (в @AfterEach) не нужно (потому что мы его удалили через UI)
-        createdTestCaseId = null;
     }
 
 }

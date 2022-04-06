@@ -1,4 +1,4 @@
-package cloud.autotests.tests.testcase;
+package cloud.autotests.tests.testCase;
 
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.BaseTest;

@@ -1,13 +1,15 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.testCaseTag;
 
 import cloud.autotests.api.testCaseTag.*;
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Story("Test case tags tests")
-public class TestCaseTagsTests extends BaseTest {
+public class TestCaseTagsCrudTests extends BaseTest {
 
 	// Project name [GOST_group_tests]
 	private static final int PROJECT_ID = 291;
@@ -36,6 +38,12 @@ public class TestCaseTagsTests extends BaseTest {
 		Integer newTagId = TestCaseTagApi.getTestCaseTagId(testCaseId, randomTagName);
 		TestCaseTagApi.deleteTestCaseTagId(newTagId);
 	}
+
+	@Test
+	@Disabled
+	@WithLogin
+	@DisplayName("Edit test case tag")
+	void editTestCaseTag() {}
 
 	@Test
 	@WithLogin

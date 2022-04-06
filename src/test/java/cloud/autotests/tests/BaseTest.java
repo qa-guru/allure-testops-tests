@@ -31,13 +31,8 @@ public class BaseTest {
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
 
-    protected final LoginPage loginPage = new LoginPage();
-
     protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
     protected final TestCasePage testCasePage = new TestCasePage();
-
-    protected final TestPlansListPage testPlansListPage = new TestPlansListPage();
-    protected final TestPlanPage testPlanPage = new TestPlanPage();
 
     @BeforeAll
     static void setUp() {
