@@ -28,6 +28,12 @@ public class Sidebar {
         userInfoItems.find(text("Sign out")).click();
     }
 
+    @Step("Navigate to user profile")
+    public void navigateToUserProfile() {
+        navigateTo(MenuItem.USER_MENU);
+        userInfoItems.find(text("Your profile")).click();
+    }
+
     @Step("Verify user successful authorization as [{username}]")
     public void checkThatUserAuthorizedAs(String username) {
         navigateTo(MenuItem.USER_MENU);

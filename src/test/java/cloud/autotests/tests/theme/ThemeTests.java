@@ -1,19 +1,19 @@
-package cloud.autotests.tests;
+package cloud.autotests.tests.theme;
 
 import cloud.autotests.config.App;
+import cloud.autotests.helpers.LocalStorageHelper;
+import cloud.autotests.tests.BaseTest;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static com.codeborne.selenide.Selectors.byName;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.localStorage;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.refresh;
 import static io.qameta.allure.Allure.step;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ThemeTests extends BaseTest {
-
 
     @CsvSource(value = {
             "light,dark,#1e293b",
@@ -24,8 +24,7 @@ public class ThemeTests extends BaseTest {
         step("Open the main page", () ->
                 open(""));
         step("Install a " + beforeTheme + " theme", () -> {
-            // ToDo вынести в LocalStorageHelper
-            localStorage().setItem("AS_THEME", beforeTheme);
+            LocalStorageHelper.setItem("AS_THEME", beforeTheme);
             refresh();
         });
         step("Fill login form", () -> {
@@ -46,4 +45,5 @@ public class ThemeTests extends BaseTest {
                 )
                         .isEqualTo(hexBackgroundColor));
     }
+
 }

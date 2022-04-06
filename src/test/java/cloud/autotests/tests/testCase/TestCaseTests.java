@@ -61,7 +61,7 @@ public class TestCaseTests extends BaseTest {
         // Act
         testCasePage.editTestCaseName(newName);
         testCasePage.editTestCaseDescription(newDescription);
-        testCasePage.changeTestCaseStatus(DEFAULT_MANUAL, ACTIVE);
+        testCasePage.changeTestCaseStatus(EXTENDED_MANUAL, ACTIVE);
 
         // Assert
         testCasePage.checkThatTestCaseNameIs(newName);
