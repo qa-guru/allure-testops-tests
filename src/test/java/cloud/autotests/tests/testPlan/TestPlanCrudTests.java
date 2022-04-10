@@ -9,7 +9,7 @@ import cloud.autotests.tests.BaseTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class TestPlanTests extends BaseTest {
+public class TestPlanCrudTests extends BaseTest {
 
     private final TestPlansListPage testPlansListPage = new TestPlansListPage();
     private final TestPlanPage testPlanPage = new TestPlanPage();

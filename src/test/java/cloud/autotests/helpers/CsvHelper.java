@@ -3,36 +3,45 @@ package cloud.autotests.helpers;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import io.qameta.allure.Step;
-import lombok.Getter;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CsvHelper {
 
-    @Getter
-    private final File file;
     private final CSVReader reader;
 
-    public CsvHelper(File file) throws FileNotFoundException {
-        if (!file.exists())
-            throw new RuntimeException("File " + file.getAbsoluteFile() + " don't exist");
-        this.file = file;
+    public CsvHelper(CSVReader reader) {
+        this.reader = reader;
+    }
 
-        FileInputStream inputStream = new FileInputStream(file);
-        reader = new CSVReader(new InputStreamReader(inputStream));
+    public static CsvHelper of(File file) {
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+            CSVReader reader = new CSVReader(inputStreamReader);
+            return new CsvHelper(reader);
+        } catch (IOException exception) {
+            throw new RuntimeException("File " + file.getAbsoluteFile() + " don't exist");
+        }
     }
 
     @Step("Convert csv to list")
-    public List<String[]> convertToList() throws IOException, CsvException {
-        return reader.readAll();
+    public List<String[]> convertToList() {
+        try {
+            return reader.readAll();
+        } catch (IOException | CsvException exception) {
+            return new ArrayList<>();
+        }
     }
 
-    @Step("Csv file should have size [{expectedSize}]")
-    public void shouldHaveSize(int expectedSize) throws IOException, CsvException {
-        assertEquals(expectedSize, convertToList().size());
+    public void close() {
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

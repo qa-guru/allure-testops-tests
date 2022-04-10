@@ -12,7 +12,7 @@ import static cloud.autotests.data.TestCaseStatus.*;
 import static cloud.autotests.data.TestCaseWorkflow.*;
 
 @Story("Test case tests")
-public class TestCaseTests extends BaseTest {
+public class TestCaseCrudTests extends BaseTest {
 
     // Test project [dont-remove-autotests-for-test-cases]
     private final static int PROJECT_ID = 1159;

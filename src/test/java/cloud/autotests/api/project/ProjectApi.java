@@ -1,7 +1,7 @@
 package cloud.autotests.api.project;
 
 import cloud.autotests.api.base.BaseApi;
-import cloud.autotests.api.EndPoints;
+import cloud.autotests.api.endpoint.ProjectEndPoint;
 
 import static io.restassured.RestAssured.given;
 
@@ -11,7 +11,7 @@ public class ProjectApi extends BaseApi {
         String json = given().spec(defaultRequestSpec)
                     .body(project.toJson())
                 .when()
-                    .post(EndPoints.PROJECT_CREATE)
+                    .post(ProjectEndPoint.CREATE)
                 .then()
                     .statusCode(200)
                     .extract().response().asString();
@@ -22,7 +22,7 @@ public class ProjectApi extends BaseApi {
         String json = given().spec(defaultRequestSpec)
                 .queryParam("name", projectName)
                 .when()
-                    .get(EndPoints.PROJECT_FIND_BY_NAME)
+                    .get(ProjectEndPoint.FIND_BY_NAME)
                 .then()
                     .statusCode(200)
                     .extract().response().asString();
@@ -33,7 +33,7 @@ public class ProjectApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", projectId)
                 .when()
-                    .delete(EndPoints.PROJECT_BY_ID)
+                    .delete(ProjectEndPoint.DELETE)
                 .then()
                     .statusCode(204);
     }

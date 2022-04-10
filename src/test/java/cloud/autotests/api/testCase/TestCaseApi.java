@@ -1,7 +1,8 @@
 package cloud.autotests.api.testCase;
 
 import cloud.autotests.api.base.BaseApi;
-import cloud.autotests.api.EndPoints;
+import cloud.autotests.api.endpoint.TestCaseEndPoint;
+
 import static org.hamcrest.Matchers.anyOf;
 import static org.hamcrest.Matchers.is;
 
@@ -13,7 +14,7 @@ public class TestCaseApi extends BaseApi {
         String jsonResponse = given().spec(defaultRequestSpec)
                     .body(testCase.toJson())
                 .when()
-                    .post(EndPoints.TEST_CASE)
+                    .post(TestCaseEndPoint.CREATE)
                 .then()
                     .statusCode(200)
                     .extract()
@@ -26,7 +27,7 @@ public class TestCaseApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", testCaseId)
                 .when()
-                    .delete(EndPoints.TEST_CASE_DELETE)
+                    .delete(TestCaseEndPoint.DELETE)
                 .then()
                     .statusCode(anyOf(is(200), is(202), is(204)));
     }
