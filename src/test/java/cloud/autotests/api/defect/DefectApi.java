@@ -1,7 +1,7 @@
 package cloud.autotests.api.defect;
 
 import cloud.autotests.api.base.BaseApi;
-import cloud.autotests.api.EndPoints;
+import cloud.autotests.api.endpoint.DefectEndPoint;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.anyOf;
@@ -13,7 +13,7 @@ public class DefectApi extends BaseApi {
         String responseJson = given().spec(defaultRequestSpec)
                     .body(defect.toJson())
                 .when()
-                    .post(EndPoints.DEFECT_CREATE)
+                    .post(DefectEndPoint.CREATE)
                 .then()
                     .statusCode(anyOf(is(200), is(204)))
                     .extract().response().asString();
@@ -24,7 +24,7 @@ public class DefectApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", defectId)
                 .when()
-                    .delete(EndPoints.DEFECT_DELETE)
+                    .delete(DefectEndPoint.DELETE)
                 .then()
                     .statusCode(anyOf(is(200), is(204)));
     }
