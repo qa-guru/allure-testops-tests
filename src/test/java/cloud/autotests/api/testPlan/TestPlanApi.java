@@ -1,7 +1,7 @@
 package cloud.autotests.api.testPlan;
 
 import cloud.autotests.api.base.BaseApi;
-import cloud.autotests.api.EndPoints;
+import cloud.autotests.api.endpoint.TestPlanEndPoint;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.anyOf;
@@ -13,7 +13,7 @@ public class TestPlanApi extends BaseApi {
         String json = given().spec(defaultRequestSpec)
                     .body(testPlan.toJson())
                 .when()
-                    .post(EndPoints.TEST_PLAN_CREATE)
+                    .post(TestPlanEndPoint.CREATE)
                 .then()
                     .statusCode(200)
                     .extract().response().asString();
@@ -24,7 +24,7 @@ public class TestPlanApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", testPlanId)
                 .when()
-                    .delete(EndPoints.TEST_PLAN_DELETE)
+                    .delete(TestPlanEndPoint.DELETE)
                 .then()
                     .statusCode(anyOf(is(200), is(202), is(204)));
     }
