@@ -1,7 +1,7 @@
 package cloud.autotests.api.testCaseTag;
 
 import cloud.autotests.api.base.BaseApi;
-import cloud.autotests.api.EndPoints;
+import cloud.autotests.api.endpoint.TestCaseTagEndPoint;
 import com.google.gson.Gson;
 import io.restassured.response.Response;
 import java.util.Arrays;
@@ -28,7 +28,7 @@ public class TestCaseTagApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", tagId)
                 .when()
-                    .delete(EndPoints.TEST_CASE_TAG_DELETE)
+                    .delete(TestCaseTagEndPoint.DELETE)
                 .then()
                     .statusCode(204);
     }
@@ -41,7 +41,7 @@ public class TestCaseTagApi extends BaseApi {
         String json = given().spec(defaultRequestSpec)
                     .body(tag.toJson())
                 .when()
-                    .post(EndPoints.TEST_CASE_TAG_CREATE)
+                    .post(TestCaseTagEndPoint.CREATE)
                 .then()
                     .statusCode(200)
                     .extract().asString();
@@ -58,7 +58,7 @@ public class TestCaseTagApi extends BaseApi {
                     .pathParam("testCaseId", testCaseId)
                     .body(builder.build().toJson())
                 .when()
-                    .post(EndPoints.TEST_CASE_TAG_SET_TAGS)
+                    .post(TestCaseTagEndPoint.SET_BY_TEST_CASE)
                 .then()
                     .statusCode(200)
                     .extract()
@@ -69,7 +69,7 @@ public class TestCaseTagApi extends BaseApi {
         return given().spec(defaultRequestSpec)
                 .pathParam("testCaseId", testCaseId)
                 .when()
-                .get(EndPoints.TEST_CASE_TAG_GET)
+                .get(TestCaseTagEndPoint.FIND_BY_TEST_CASE)
                 .then()
                 .statusCode(200)
                 .extract()
