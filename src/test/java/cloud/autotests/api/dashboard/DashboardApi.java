@@ -1,7 +1,7 @@
 package cloud.autotests.api.dashboard;
 
 import cloud.autotests.api.base.BaseApi;
-import cloud.autotests.api.EndPoints;
+import cloud.autotests.api.endpoint.DashboardEndPoint;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.anyOf;
@@ -13,7 +13,7 @@ public class DashboardApi extends BaseApi {
         String json = given().spec(defaultRequestSpec)
                     .body(dashboard.toJson())
                 .when()
-                    .post(EndPoints.DASHBOARD_CREATE)
+                    .post(DashboardEndPoint.CREATE)
                 .then()
                     .statusCode(200)
                     .extract().response().asString();
@@ -24,7 +24,7 @@ public class DashboardApi extends BaseApi {
         given().spec(defaultRequestSpec)
                     .pathParam("id", dashboardId)
                 .when()
-                    .delete(EndPoints.DASHBOARD_DELETE)
+                    .delete(DashboardEndPoint.DELETE)
                 .then()
                     .statusCode(anyOf(is(200), is(202), is(204)));
     }
