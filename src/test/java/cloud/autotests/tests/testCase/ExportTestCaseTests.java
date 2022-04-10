@@ -9,6 +9,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
+import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ExportTestCaseTests extends BaseTest {
 
@@ -27,11 +31,14 @@ public class ExportTestCaseTests extends BaseTest {
         // Act
         testCasesListPage.selectTestCases(existTestCases);
         File file = testCasesListPage.exportToCsv();
-        CsvHelper csvHelper = new CsvHelper(file);
+        CsvHelper csvReader = CsvHelper.of(file);
+        List<String[]> csvToList = csvReader.convertToList();
+        csvReader.close();
 
         // Assert
         // В ожидаемом результате + 1, тк есть заголовок таблицы
-        csvHelper.shouldHaveSize(existTestCases.length + 1);
+        step("Csv file should have size [" + existTestCases.length + "]", () ->
+                assertEquals(existTestCases.length + 1, csvToList.size()));
 
         // ToDo Добавить более детальную проверку содержимого csv-файла
     }
