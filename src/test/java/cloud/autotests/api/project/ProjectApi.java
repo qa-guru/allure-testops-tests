@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 
 public class ProjectApi extends BaseApi {
 
-    public static ProjectResponseDto createProject(CreateProjectRequestDto project) {
+    public ProjectResponseDto createProject(CreateProjectRequestDto project) {
         String json = given().spec(defaultRequestSpec)
                     .body(project.toJson())
                 .when()
@@ -18,7 +18,7 @@ public class ProjectApi extends BaseApi {
         return ProjectResponseDto.fromJson(json);
     }
 
-    public static ProjectResponseDto[] getProjectsByName(String projectName) {
+    public ProjectResponseDto[] getProjectsByName(String projectName) {
         String json = given().spec(defaultRequestSpec)
                 .queryParam("name", projectName)
                 .when()
@@ -29,7 +29,7 @@ public class ProjectApi extends BaseApi {
         return ProjectResponseDto.fromJsonToArray(json);
     }
 
-    public static void deleteProject(int projectId) {
+    public void deleteProject(int projectId) {
         given().spec(defaultRequestSpec)
                     .pathParam("id", projectId)
                 .when()

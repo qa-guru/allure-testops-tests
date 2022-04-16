@@ -14,6 +14,8 @@ public class TestPlanCrudTests extends BaseTest {
     private final TestPlansListPage testPlansListPage = new TestPlansListPage();
     private final TestPlanPage testPlanPage = new TestPlanPage();
 
+    private final TestPlanApi testPlanApi = new TestPlanApi();
+
     // Test project [dont-remove-autotests-test-plans]
     private final static int PROJECT_ID = 1178;
     private final CreateTestPlanRequestDto testPlan = CreateTestPlanRequestDto.builder()
@@ -47,7 +49,7 @@ public class TestPlanCrudTests extends BaseTest {
         testPlansListPage.checkThatTestPlansListContainsTestPlan(testPlan.getName());
 
         // Cleaning data
-        TestPlanApi.deleteTestPlan(createdTestPlan);
+        testPlanApi.deleteTestPlan(createdTestPlan);
     }
 
     @Test
@@ -55,7 +57,7 @@ public class TestPlanCrudTests extends BaseTest {
     @DisplayName("Delete test plan")
     void deleteTestPlan() {
         // Arrange
-        int createdTestPlan = TestPlanApi.createTestPlan(testPlan).getId();
+        int createdTestPlan = testPlanApi.createTestPlan(testPlan).getId();
         testPlanPage.openPage(createdTestPlan);
 
         // Act

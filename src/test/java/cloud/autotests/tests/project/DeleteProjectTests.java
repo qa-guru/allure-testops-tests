@@ -1,7 +1,6 @@
 package cloud.autotests.tests.project;
 
 import cloud.autotests.api.project.CreateProjectRequestDto;
-import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.data.MenuItem;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.BaseTest;
@@ -20,7 +19,7 @@ public class DeleteProjectTests extends BaseTest {
 
     @BeforeEach
     void signInAndCreateProject() {
-        projectId = ProjectApi.createProject(project).getId();
+        projectId = projectApi.createProject(project).getId();
         projectPage.openPage(projectId);
         projectPage.checkTitle(project.getName());
     }
@@ -45,7 +44,7 @@ public class DeleteProjectTests extends BaseTest {
     @DisplayName("Delete project by Api")
     void deleteProjectByApi() {
         // Act
-        ProjectApi.deleteProject(projectId);
+        projectApi.deleteProject(projectId);
         projectsListPage.openPage();
     }
 

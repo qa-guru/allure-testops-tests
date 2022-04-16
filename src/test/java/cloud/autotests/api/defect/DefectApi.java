@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 
 public class DefectApi extends BaseApi {
 
-    public static DefectInfoResponseDto createDefect(CreateDefectRequestDto defect) {
+    public DefectInfoResponseDto createDefect(CreateDefectRequestDto defect) {
         String responseJson = given().spec(defaultRequestSpec)
                     .body(defect.toJson())
                 .when()
@@ -20,7 +20,7 @@ public class DefectApi extends BaseApi {
         return DefectInfoResponseDto.fromJson(responseJson);
     }
 
-    public static void deleteDefect(int defectId) {
+    public void deleteDefect(int defectId) {
         given().spec(defaultRequestSpec)
                     .pathParam("id", defectId)
                 .when()

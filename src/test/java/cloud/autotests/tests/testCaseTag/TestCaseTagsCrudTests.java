@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 @Story("Test case tags tests")
 public class TestCaseTagsCrudTests extends BaseTest {
 
+	private final TestCaseTagApi tagApi = new TestCaseTagApi();
+
 	// Project name [GOST_group_tests]
 	private static final int PROJECT_ID = 291;
 	private final String randomTagName = faker.random().hex(10);
@@ -35,8 +37,8 @@ public class TestCaseTagsCrudTests extends BaseTest {
 
 		// Cleaning data
 		// Удаляем новый созданный tag
-		Integer newTagId = TestCaseTagApi.getTestCaseTagId(testCaseId, randomTagName);
-		TestCaseTagApi.deleteTestCaseTagId(newTagId);
+		Integer newTagId = tagApi.getTestCaseTagId(testCaseId, randomTagName);
+		tagApi.deleteTestCaseTagId(newTagId);
 	}
 
 	@Test
@@ -54,8 +56,8 @@ public class TestCaseTagsCrudTests extends BaseTest {
 		int testCaseId = 7980;
 
 		// Arrange
-		TestCaseTagDto tag = TestCaseTagApi.createNewTestCaseTag(randomTagName);
-		TestCaseTagApi.setTestCaseTags(testCaseId, tag);
+		TestCaseTagDto tag = tagApi.createNewTestCaseTag(randomTagName);
+		tagApi.setTestCaseTags(testCaseId, tag);
 		testCasePage.openPage(PROJECT_ID, testCaseId);
 		testCasePage.checkThatTagsSectionContainsTag(tag.getName());
 

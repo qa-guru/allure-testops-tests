@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 
 public class DashboardApi extends BaseApi {
 
-    public static DashboardResponseDto createDashboard(CreateDashboardRequestDto dashboard) {
+    public DashboardResponseDto createDashboard(CreateDashboardRequestDto dashboard) {
         String json = given().spec(defaultRequestSpec)
                     .body(dashboard.toJson())
                 .when()
@@ -20,7 +20,7 @@ public class DashboardApi extends BaseApi {
         return DashboardResponseDto.fromJson(json);
     }
 
-    public static void deleteDashboard(int dashboardId) {
+    public void deleteDashboard(int dashboardId) {
         given().spec(defaultRequestSpec)
                     .pathParam("id", dashboardId)
                 .when()
