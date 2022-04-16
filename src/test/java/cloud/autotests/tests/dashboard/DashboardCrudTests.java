@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 public class DashboardCrudTests extends BaseTest {
 
     private final DashboardPage dashboardPage = new DashboardPage();
+    private final DashboardApi dashboardApi = new DashboardApi();
 
     // Test project [dont-remove-autotests-for-dashboard]
     private final static int PROJECT_ID = 1175;
@@ -38,7 +39,7 @@ public class DashboardCrudTests extends BaseTest {
 
         // Cleaning data
         int createdDashboardId = dashboardPage.getDashboardId();
-        DashboardApi.deleteDashboard(createdDashboardId);
+        dashboardApi.deleteDashboard(createdDashboardId);
     }
 
     @Test
@@ -52,7 +53,7 @@ public class DashboardCrudTests extends BaseTest {
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
         // Arrange
-        int createdDashboardId = DashboardApi.createDashboard(dashboard).getId();
+        int createdDashboardId = dashboardApi.createDashboard(dashboard).getId();
         dashboardPage.openPageDashboard(PROJECT_ID, createdDashboardId);
         dashboardPage.checkThatDashboardsListContainsDashboard(dashboard.getName());
         dashboardPage.checkThatNewDashboardHasAddWidgetButton();

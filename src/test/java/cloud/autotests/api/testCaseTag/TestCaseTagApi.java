@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 
 public class TestCaseTagApi extends BaseApi {
 
-    public static Integer getTestCaseTagId(int testCaseId, String tagName) {
+    public Integer getTestCaseTagId(int testCaseId, String tagName) {
         String json = getTestCaseTags(testCaseId).asString();
         TestCaseTagDto[] tags = new Gson().fromJson(json, TestCaseTagDto[].class);
 
@@ -24,7 +24,7 @@ public class TestCaseTagApi extends BaseApi {
         throw new RuntimeException("Don't found tag with name " + tagName);
     }
 
-    public static void deleteTestCaseTagId(int tagId) {
+    public void deleteTestCaseTagId(int tagId) {
         given().spec(defaultRequestSpec)
                     .pathParam("id", tagId)
                 .when()
@@ -33,7 +33,7 @@ public class TestCaseTagApi extends BaseApi {
                     .statusCode(204);
     }
 
-    public static TestCaseTagDto createNewTestCaseTag(String newTagName) {
+    public TestCaseTagDto createNewTestCaseTag(String newTagName) {
         TestCaseTagDto tag = TestCaseTagDto.builder()
                 .name(newTagName)
                 .build();
@@ -49,7 +49,7 @@ public class TestCaseTagApi extends BaseApi {
         return TestCaseTagDto.fromJson(json);
     }
 
-    public static void setTestCaseTags(int testCaseId, TestCaseTagDto... tags) {
+    public void setTestCaseTags(int testCaseId, TestCaseTagDto... tags) {
         TestCaseTagsDtoBuilder builder = TestCaseTagsDtoBuilder.builder();
         for (TestCaseTagDto tag : tags)
             builder.addTag(tag);
@@ -65,7 +65,7 @@ public class TestCaseTagApi extends BaseApi {
                     .response();
     }
 
-    private static Response getTestCaseTags(int testCaseId) {
+    private Response getTestCaseTags(int testCaseId) {
         return given().spec(defaultRequestSpec)
                 .pathParam("testCaseId", testCaseId)
                 .when()

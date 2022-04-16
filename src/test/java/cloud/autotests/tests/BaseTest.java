@@ -1,18 +1,16 @@
 package cloud.autotests.tests;
 
+import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.config.App;
 import cloud.autotests.config.Project;
 import cloud.autotests.helpers.AllureAttachments;
 import cloud.autotests.helpers.DriverSettings;
 import cloud.autotests.helpers.DriverUtils;
 import cloud.autotests.helpers.ExtendedSelenideListener;
-import cloud.autotests.pages.login.LoginPage;
 import cloud.autotests.pages.project.ProjectPage;
 import cloud.autotests.pages.project.ProjectsListPage;
 import cloud.autotests.pages.testCase.TestCasePage;
 import cloud.autotests.pages.testCase.TestCasesListPage;
-import cloud.autotests.pages.testPlan.TestPlanPage;
-import cloud.autotests.pages.testPlan.TestPlansListPage;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
@@ -30,6 +28,7 @@ public class BaseTest {
 
     protected final ProjectsListPage projectsListPage = new ProjectsListPage();
     protected final ProjectPage projectPage = new ProjectPage();
+    protected final ProjectApi projectApi = new ProjectApi();
 
     protected final TestCasesListPage testCasesListPage = new TestCasesListPage();
     protected final TestCasePage testCasePage = new TestCasePage();

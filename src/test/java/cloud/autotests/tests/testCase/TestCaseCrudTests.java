@@ -14,6 +14,8 @@ import static cloud.autotests.data.TestCaseWorkflow.*;
 @Story("Test case tests")
 public class TestCaseCrudTests extends BaseTest {
 
+    private final TestCaseApi testCaseApi = new TestCaseApi();
+
     // Test project [dont-remove-autotests-for-test-cases]
     private final static int PROJECT_ID = 1159;
     private final CreateTestCaseRequestDto testCase = CreateTestCaseRequestDto.builder()
@@ -42,7 +44,7 @@ public class TestCaseCrudTests extends BaseTest {
         testCasePage.checkThatTestCaseStatusIs(DRAFT);
 
         // Cleaning data
-        TestCaseApi.deleteTestCase(createdTestCaseId);
+        testCaseApi.deleteTestCase(createdTestCaseId);
     }
 
     @Test
@@ -54,7 +56,7 @@ public class TestCaseCrudTests extends BaseTest {
         String newDescription = faker.random().hex(20);
 
         // Arrange
-        int createdTestCaseId = TestCaseApi.createTestCase(testCase).getId();
+        int createdTestCaseId = testCaseApi.createTestCase(testCase).getId();
         testCasePage.openPage(PROJECT_ID, createdTestCaseId);
         testCasesListPage.checkThatTestCasesTableContainsTestCase(testCase.getName());
 
@@ -69,7 +71,7 @@ public class TestCaseCrudTests extends BaseTest {
         testCasePage.checkThatTestCaseStatusIs(ACTIVE);
 
         // Cleaning data
-        TestCaseApi.deleteTestCase(createdTestCaseId);
+        testCaseApi.deleteTestCase(createdTestCaseId);
     }
 
     @Test
@@ -77,7 +79,7 @@ public class TestCaseCrudTests extends BaseTest {
     @DisplayName("Delete test case")
     void deleteTestCase() {
         // Arrange
-        int createdTestCaseId = TestCaseApi.createTestCase(testCase).getId();
+        int createdTestCaseId = testCaseApi.createTestCase(testCase).getId();
         testCasePage.openPage(PROJECT_ID, createdTestCaseId);
         testCasesListPage.checkThatTestCasesTableContainsTestCase(testCase.getName());
 

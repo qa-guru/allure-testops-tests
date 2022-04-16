@@ -1,7 +1,6 @@
 package cloud.autotests.tests.project;
 
 import cloud.autotests.api.project.CreateProjectRequestDto;
-import cloud.autotests.api.project.ProjectApi;
 import cloud.autotests.helpers.WithLogin;
 import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
@@ -24,13 +23,13 @@ public class CreateProjectTests extends BaseTest {
 
         // Act
         projectsListPage.createNewProject(project.getName());
-        int projectId = ProjectApi.getProjectsByName(project.getName())[0].getId();
+        int projectId = projectApi.getProjectsByName(project.getName())[0].getId();
 
         // Assert
         projectPage.checkTitle(project.getName());
 
         // Cleaning data
-        ProjectApi.deleteProject(projectId);
+        projectApi.deleteProject(projectId);
     }
 
     @Test
@@ -53,14 +52,14 @@ public class CreateProjectTests extends BaseTest {
     @DisplayName("Create new project by API")
     void createProjectByApi() {
         // Act
-        int projectId = ProjectApi.createProject(this.project).getId();
+        int projectId = projectApi.createProject(this.project).getId();
         projectPage.openPage(projectId);
 
         // Assert
         projectPage.checkTitle(project.getName());
 
         // Cleaning data
-        ProjectApi.deleteProject(projectId);
+        projectApi.deleteProject(projectId);
     }
 
 }

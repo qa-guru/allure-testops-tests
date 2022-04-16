@@ -18,6 +18,7 @@ public class DefectCrudTests extends BaseTest {
 
     private final DefectsListPage defectsListPage = new DefectsListPage();
     private final DefectPage defectPage = new DefectPage();
+    private final DefectApi defectApi = new DefectApi();
 
     // Test project [dont-remove-autotests-for-defects]
     private final static int PROJECT_ID = 1157;
@@ -45,7 +46,7 @@ public class DefectCrudTests extends BaseTest {
         defectPage.checkThatDefectStatusIs(DefectStatus.OPEN);
 
         // Cleaning data
-        DefectApi.deleteDefect(createdDefectId);
+        defectApi.deleteDefect(createdDefectId);
     }
 
     @Test
@@ -57,7 +58,7 @@ public class DefectCrudTests extends BaseTest {
         String newDescription = faker.random().hex(20);
 
         // Arrange
-        int createdDefectId = DefectApi.createDefect(defect).getId();
+        int createdDefectId = defectApi.createDefect(defect).getId();
         defectPage.openPage(PROJECT_ID, createdDefectId);
 
         // Act
@@ -71,7 +72,7 @@ public class DefectCrudTests extends BaseTest {
         defectPage.checkThatDefectStatusIs(DefectStatus.CLOSED);
 
         // Cleaning data
-        DefectApi.deleteDefect(createdDefectId);
+        defectApi.deleteDefect(createdDefectId);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class DefectCrudTests extends BaseTest {
     @DisplayName("Delete defect")
     void deleteDefect() {
         // Arrange
-        int createdDefectId = DefectApi.createDefect(defect).getId();
+        int createdDefectId = defectApi.createDefect(defect).getId();
         defectPage.openPage(PROJECT_ID, createdDefectId);
 
         // Act

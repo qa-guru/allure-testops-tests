@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 
 public class TestPlanApi extends BaseApi {
 
-    public static TestPlanResponseDto createTestPlan(CreateTestPlanRequestDto testPlan) {
+    public TestPlanResponseDto createTestPlan(CreateTestPlanRequestDto testPlan) {
         String json = given().spec(defaultRequestSpec)
                     .body(testPlan.toJson())
                 .when()
@@ -20,7 +20,7 @@ public class TestPlanApi extends BaseApi {
         return TestPlanResponseDto.fromJson(json);
     }
 
-    public static void deleteTestPlan(int testPlanId) {
+    public void deleteTestPlan(int testPlanId) {
         given().spec(defaultRequestSpec)
                     .pathParam("id", testPlanId)
                 .when()
