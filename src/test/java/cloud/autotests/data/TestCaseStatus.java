@@ -1,7 +1,6 @@
 package cloud.autotests.data;
 
 public enum TestCaseStatus {
-
     ACTIVE("Active"),
     DRAFT("Draft"),
     OUTDATED("Outdated"),
