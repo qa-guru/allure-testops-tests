@@ -10,13 +10,14 @@ import static com.codeborne.selenide.WebDriverRunner.getWebDriver;
 
 public class LoginExtension implements BeforeEachCallback {
 
+    private static final String ALLURE_TESTOPS_SESSION = "ALLURE_TESTOPS_SESSION";
+
     @Override
     public void beforeEach(ExtensionContext context) {
-        String allureCookieName = "ALLURE_TESTOPS_SESSION";
         String cookies = AuthorizationApi.getAuthorizationCookie();
 
         open("/favicon.ico");
-        getWebDriver().manage().addCookie(new Cookie(allureCookieName, cookies));
+        getWebDriver().manage().addCookie(new Cookie(ALLURE_TESTOPS_SESSION, cookies));
     }
 
 }

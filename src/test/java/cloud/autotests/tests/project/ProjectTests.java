@@ -1,49 +1,59 @@
 package cloud.autotests.tests.project;
 
+import cloud.autotests.api.project.ProjectResponseDto;
 import cloud.autotests.helpers.WithLogin;
+import cloud.autotests.helpers.extensions.WithProject;
 import cloud.autotests.tests.BaseTest;
+import com.github.javafaker.Faker;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 @Story("Project tests")
-public class ProjectTests extends BaseTest {
+class ProjectTests extends BaseTest {
 
+    @Test
     @WithLogin
-    @CsvSource(value = {
-            "public project,dont-remove-autotests-public-project",
-            "non-public project,dont-remove-autotests-non-public-project"
-    })
-    @ParameterizedTest(name = "Find exist {0} [{1}] in projects list")
-    void findExistProject(String projectPrivacy, String projectName) {
+    @WithProject(isPublic = true)
+    @Tags({@Tag("web"), @Tag("search")})
+    @DisplayName("Find project by the project name with visibility true")
+    void findExistProject(ProjectResponseDto project) {
+        projectsListPage.openPage();
+        projectsListPage.findProject(project.getName());
+        projectsListPage.checkThatProjectsListContainsProject(project.getName());
+    }
+
+    @Test
+    @WithLogin
+    @WithProject(isPublic = false)
+    @Tags({@Tag("web"), @Tag("search")})
+    @DisplayName("Find project by the project name with visibility false")
+    void findProjectByNameWithVisibilityFalse(ProjectResponseDto project) {
+        projectsListPage.openPage();
+        projectsListPage.findProject(project.getName());
+        projectsListPage.checkThatProjectsListContainsProject(project.getName());
+    }
+
+    @Test
+    @WithLogin
+    @Tags({@Tag("web"), @Tag("search")})
+    @DisplayName("Find project by none existent project name")
+    void findProjectByNoneExistentName() {
+        final String projectName = new Faker().funnyName().name();
+
         projectsListPage.openPage();
         projectsListPage.findProject(projectName);
-
-        projectsListPage.checkThatProjectsListContainsProject(projectName);
+        projectsListPage.checkThatProjectsListDoNotContainsProject(projectName);
     }
 
     @Test
     @WithLogin
-    @DisplayName("Find don't exist project in projects list")
-    void findDoNotExistProject() {
-        String doNotExistProject = "OneTwoThreeLaLaLaLa123456789";
-
-        projectsListPage.openPage();
-        projectsListPage.findProject(doNotExistProject);
-
-        projectsListPage.checkThatProjectsListDoNotContainsProject(doNotExistProject);
-    }
-
-    @Test
-    @WithLogin
+    @WithProject(isPublic = true)
     @DisplayName("Project display all widgets")
-    void projectDisplayAllWidgets() {
-        // Project [dont-remove-autotests-for-project]
-        int projectId = 1191;
-
-        projectPage.openPage(projectId);
+    void projectDisplayAllWidgets(ProjectResponseDto project) {
+        projectPage.openPage(project.getId());
         projectPage.checkThatProjectHas5Widgets();
     }
 
