@@ -27,11 +27,9 @@ public class ThemeTests extends BaseTest {
             LocalStorageHelper.setItem("AS_THEME", beforeTheme);
             refresh();
         });
-        step("Fill login form", () -> {
-            $(byName("username")).setValue(App.config.userLogin());
-            $(byName("password")).setValue((App.config.userPassword()))
-                    .pressEnter();
-        });
+
+        loginPage.signIn(App.config.userLogin(), App.config.userPassword());
+
         step("Click on the user menu", () ->
                 $("span.LogoWithPlaceholder").click());
         step("Choose a " + afterTheme + " theme", () ->
