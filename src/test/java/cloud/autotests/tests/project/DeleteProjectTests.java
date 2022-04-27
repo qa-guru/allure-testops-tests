@@ -24,19 +24,15 @@ public class DeleteProjectTests extends BaseTest {
         projectPage.checkTitle(project.getName());
     }
 
-    @AfterEach
-    void checkThatProjectsListDoNotContainsProject() {
-        // Assert
-        projectsListPage.checkThatProjectsListDoNotContainsProject(project.getName());
-    }
-
     @Test
     @WithLogin
     @DisplayName("Delete project by UI")
     void deleteProjectByUI() {
-        // Act
-        projectPage.getSidebar().navigateTo(MenuItem.SETTINGS);
+        projectPage.getSidebar()
+                .navigateTo(MenuItem.SETTINGS);
         projectPage.deleteProject();
+
+        projectsListPage.checkThatProjectsListDoNotContainsProject(project.getName());
     }
 
     @Test
@@ -46,6 +42,8 @@ public class DeleteProjectTests extends BaseTest {
         // Act
         projectApi.deleteProject(projectId);
         projectsListPage.openPage();
+
+        projectsListPage.checkThatProjectsListDoNotContainsProject(project.getName());
     }
 
 }
