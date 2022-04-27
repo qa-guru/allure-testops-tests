@@ -5,10 +5,7 @@ import com.google.gson.GsonBuilder;
 
 public interface RequestDto {
 
-    // Only exposed (@Expose) variables are to be serialized/deserialized
-    Gson gson = new GsonBuilder()
-            .excludeFieldsWithoutExposeAnnotation()
-            .create();
+    Gson gson = new GsonBuilder().create();
 
     String toJson();
 
