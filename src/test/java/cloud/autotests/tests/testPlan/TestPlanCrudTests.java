@@ -27,28 +27,19 @@ public class TestPlanCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Create test plan")
     void createTestPlan() {
-        // Test data
         int projectTestCasesCount = 3;
 
-        // Arrange
         testPlansListPage.openPage(PROJECT_ID);
-
-        // Act
         testPlansListPage.createNewTestPlan(testPlan.getName());
 
-        // Assert
         testPlanPage.checkThatSystemShowCreatedTestPlanPopup(testPlan.getName());
         testPlanPage.checkThatTestPlanNameIs(testPlan.getName());
         testPlanPage.checkThatTestPlanHasSize(projectTestCasesCount);
 
-        // Act
         int createdTestPlan = testPlanPage.getTestPlanId();
         testPlansListPage.openPage(PROJECT_ID);
-
-        // Assert
         testPlansListPage.checkThatTestPlansListContainsTestPlan(testPlan.getName());
 
-        // Cleaning data
         testPlanApi.deleteTestPlan(createdTestPlan);
     }
 
@@ -56,14 +47,10 @@ public class TestPlanCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Delete test plan")
     void deleteTestPlan() {
-        // Arrange
         int createdTestPlan = testPlanApi.createTestPlan(testPlan).getId();
         testPlanPage.openPage(createdTestPlan);
 
-        // Act
         testPlanPage.deleteTestPlan();
-
-        // Assert
         testPlansListPage.checkThatTestPlansListDoNotContainsTestPlan(testPlan.getName());
     }
 

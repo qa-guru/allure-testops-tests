@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Test;
 @Story("Login tests")
 public class LoginTests extends BaseTest {
 
-    private final LoginPage loginPage = new LoginPage();
-
     @Test
     @DisplayName("Successful login to account")
     void loginTest() {

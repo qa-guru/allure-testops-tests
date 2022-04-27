@@ -7,6 +7,8 @@ import static io.restassured.RestAssured.given;
 
 public class AuthorizationApi {
 
+    private static final String ALLURE_TESTOPS_SESSION = "ALLURE_TESTOPS_SESSION";
+
     public static AuthorizationResponseDto getAuthorization() {
         String json = given()
                     .filter(AllureRestAssuredFilter.withCustomTemplates())
@@ -33,7 +35,7 @@ public class AuthorizationApi {
                     .post("/api/login/system")
                 .then()
                     .statusCode(200).extract().response()
-                    .getCookie("ALLURE_TESTOPS_SESSION");
+                    .getCookie(ALLURE_TESTOPS_SESSION);
     }
 
 }

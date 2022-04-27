@@ -1,7 +1,6 @@
 package cloud.autotests.data;
 
 public enum DefectStatus {
-
     OPEN("Open"),
     CLOSED("Closed");
 

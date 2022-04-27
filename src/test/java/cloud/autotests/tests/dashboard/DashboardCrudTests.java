@@ -27,17 +27,12 @@ public class DashboardCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Create dashboard")
     void createDashboard() {
-        // Arrange
         dashboardPage.openPageOverview(PROJECT_ID);
 
-        // Act
         dashboardPage.createNewDashboard(dashboard.getName());
-
-        // Assert
         dashboardPage.checkThatDashboardsListContainsDashboard(dashboard.getName());
         dashboardPage.checkThatNewDashboardHasAddWidgetButton();
 
-        // Cleaning data
         int createdDashboardId = dashboardPage.getDashboardId();
         dashboardApi.deleteDashboard(createdDashboardId);
     }
@@ -52,16 +47,12 @@ public class DashboardCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Delete dashboard")
     void deleteDashboard() {
-        // Arrange
         int createdDashboardId = dashboardApi.createDashboard(dashboard).getId();
         dashboardPage.openPageDashboard(PROJECT_ID, createdDashboardId);
         dashboardPage.checkThatDashboardsListContainsDashboard(dashboard.getName());
         dashboardPage.checkThatNewDashboardHasAddWidgetButton();
 
-        // Act
         dashboardPage.deleteDashboard();
-
-        // Assert
         dashboardPage.checkThatDashboardsListDoNotContainsDashboard(dashboard.getName());
     }
 

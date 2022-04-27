@@ -32,20 +32,16 @@ public class DefectCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Create defect")
     void createDefect() {
-        // Arrange
         defectsListPage.openPage(PROJECT_ID);
 
-        // Act
         defectsListPage.createNewDefect(defect.getName(), defect.getDescription());
         int createdDefectId = defectPage.getDefectId();
 
-        // Assert
         defectsListPage.checkThatDefectsListContainsDefect(defect.getName());
         defectPage.checkThatDefectNameIs(defect.getName());
         defectPage.checkThatDefectDescriptionIs(defect.getDescription());
         defectPage.checkThatDefectStatusIs(DefectStatus.OPEN);
 
-        // Cleaning data
         defectApi.deleteDefect(createdDefectId);
     }
 
@@ -53,25 +49,20 @@ public class DefectCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Edit defect")
     void editDefect() {
-        // Test data
         String newName = faker.random().hex(15);
         String newDescription = faker.random().hex(20);
 
-        // Arrange
         int createdDefectId = defectApi.createDefect(defect).getId();
         defectPage.openPage(PROJECT_ID, createdDefectId);
 
-        // Act
         defectPage.editDefectName(newName);
         defectPage.editDefectDescription(newDescription);
         defectPage.editDefectStatus(CLOSE.getDisplayedName());
 
-        // Assert
         defectPage.checkThatDefectNameIs(newName);
         defectPage.checkThatDefectDescriptionIs(newDescription);
         defectPage.checkThatDefectStatusIs(DefectStatus.CLOSED);
 
-        // Cleaning data
         defectApi.deleteDefect(createdDefectId);
     }
 
@@ -79,14 +70,10 @@ public class DefectCrudTests extends BaseTest {
     @WithLogin
     @DisplayName("Delete defect")
     void deleteDefect() {
-        // Arrange
         int createdDefectId = defectApi.createDefect(defect).getId();
         defectPage.openPage(PROJECT_ID, createdDefectId);
 
-        // Act
         defectPage.deleteDefect();
-
-        // Assert
         defectsListPage.checkThatDefectsListDoNotContainsDefect(defect.getName());
     }
 

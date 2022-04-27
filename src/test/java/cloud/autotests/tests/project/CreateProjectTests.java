@@ -18,17 +18,12 @@ public class CreateProjectTests extends BaseTest {
     @WithLogin
     @DisplayName("Create new project by UI")
     void createNewProjectByUI() {
-        // Arrange
         projectsListPage.openPage();
 
-        // Act
         projectsListPage.createNewProject(project.getName());
         int projectId = projectApi.getProjectsByName(project.getName())[0].getId();
-
-        // Assert
         projectPage.checkTitle(project.getName());
 
-        // Cleaning data
         projectApi.deleteProject(projectId);
     }
 
@@ -36,13 +31,9 @@ public class CreateProjectTests extends BaseTest {
     @WithLogin
     @DisplayName("Create new project with empty value of name field")
     void createNewProjectWithEmptyName() {
-        // Arrange
         projectsListPage.openPage();
 
-        // Act
         projectsListPage.createNewProject("");
-
-        // Assert
         projectsListPage.createProjectPopup
                 .checkThatEmptyNameFieldHasErrorMessage();
     }
@@ -51,14 +42,11 @@ public class CreateProjectTests extends BaseTest {
     @WithLogin
     @DisplayName("Create new project by API")
     void createProjectByApi() {
-        // Act
         int projectId = projectApi.createProject(this.project).getId();
         projectPage.openPage(projectId);
 
-        // Assert
         projectPage.checkTitle(project.getName());
 
-        // Cleaning data
         projectApi.deleteProject(projectId);
     }
 

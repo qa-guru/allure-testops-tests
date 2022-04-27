@@ -7,6 +7,7 @@ import cloud.autotests.pages.testCase.TestCaseProperties;
 import cloud.autotests.pages.testCase.TestCasesListPage;
 import cloud.autotests.tests.BaseTest;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Story("Properties of test cases")
@@ -16,8 +17,9 @@ public class TestCasePropertiesTest extends BaseTest {
     private static final int PROJECT_ID = 43;
     private static final String STATUS_NAME = "New";
 
-    @WithLogin
     @Test
+    @WithLogin
+    @DisplayName("Check test case properties")
     void checkTestProperties(){
         projectPage.openPage(PROJECT_ID);
         projectPage.getSidebar().navigateTo(MenuItem.TEST_CASES);
