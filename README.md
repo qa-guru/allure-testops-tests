@@ -5,6 +5,8 @@
 # Jenkins job
 <a target="_blank" href="https://jenkins.autotests.cloud/job/allure-testops-tests/">jenkins.autotests.cloud/job/allure-testops-tests</a>
 
+# Telegram chat
+<a target="_blank" href="https://t.me/+hu8pZ73m-18xMzIy">[jenkins.autotests.cloud/job/allure-testops-tests](https://t.me/+hu8pZ73m-18xMzIy)</a>
 
 
 # USAGE examples
